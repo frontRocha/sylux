@@ -1,0 +1,14 @@
+a {
+  transition-duration: 0.5s;
+}
+
+.underline {
+  padding: 0.4rem;
+  background-color: white;
+  border-radius: 0.6rem;
+  box-shadow: 10px 10px 10px solid black;
+}
+
+.underline li {
+  color: #19cdc2;
+}

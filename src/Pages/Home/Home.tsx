@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 import { DeviceMobileCamera, Gauge, Money } from 'phosphor-react'
 
 import phoneImage from '../../Assets/celulares.png'
+import NavBar from '../../Components/Layout/NavBar/NavBar'
 
 export default function Home() {
     return (
         <main>
+            <NavBar />
             <section className="bg-[url('Assets/Rectangle1.png')] bg-no-repeat bg-banner-mobile sm:bg-banner bg-cover w-full h-screen px-10">
                 <div className="fontRal flex sm:flex-row flex-col justify-around sm:items-center h-screen max-w-[1400px] mx-auto">
                     <div>

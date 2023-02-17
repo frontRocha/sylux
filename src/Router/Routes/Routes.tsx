@@ -8,6 +8,9 @@ import DashBoard from "../../Pages/DashBoard/DashBoard"
 import PostIt from "../../Pages/PostIt/PostIt"
 
 import { PrivateAcessLogin, PrivateAcessToSystem } from "../Privates/Private"
+import NavBarSystem from '../../Components/Layout/NavBarSystem/NavBarSystem'
+import Feedback from '../../Pages/Feedback/Feedback'
+import TalkMe from '../../Pages/TalkMe/TalkMe'
 
 export const Index = () => {
     return (
@@ -24,6 +27,7 @@ export const Index = () => {
                 <Route path="/dashboard" element={
                     <PrivateAcessToSystem>
                         <React.Fragment>
+                            <NavBarSystem />
                             <Sidebar />
                             <DashBoard />
                         </React.Fragment>
@@ -33,11 +37,17 @@ export const Index = () => {
                 <Route path="/postit" element={
                     <PrivateAcessToSystem>
                         <React.Fragment>
+                            <NavBarSystem />
                             <Sidebar />
                             <PostIt />
                         </React.Fragment>
                     </PrivateAcessToSystem>}
                 />
+
+                <Route path='/feedback' element={<Feedback />} />
+
+                <Route path='talkme' element={<TalkMe />}/>
+                
 
             </Routes>
         </BrowserRouter>

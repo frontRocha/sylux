@@ -33,7 +33,7 @@ export default function Table({ data, sendId }: Props) {
     }
 
     return (
-        <div className='teste min-h-[400px] max-h-[400px] overflow-auto bg-white rounded-2xl rounded-t-none'>
+        <div className='active min-h-[400px] max-h-[400px] overflow-auto bg-white rounded-2xl rounded-t-none'>
             {vetor.length ?
                 !loader ?
                     <table className='w-full fontPop shadow'>

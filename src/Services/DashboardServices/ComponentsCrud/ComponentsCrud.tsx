@@ -3,13 +3,7 @@ import { FieldValues } from "react-hook-form"
 
 import { db } from "../../../Mocks/FirebaseConfig"
 
-import { Items, ValuesData } from "../../../Interfaces/DashBoardInterface/ComponentsCrud/ComponentsCrud" 
-
-type Convert = {
-    startDate: string
-    endDate: string
-    convertValue: number
-}
+import { Convert, Items, ValuesData } from "../../../Interfaces/DashBoardInterface/ComponentsCrud/ComponentsCrud" 
 
 export class ComponentCrudService {
     public get = async (uid: string, type: string): Promise<Items[]> => {
@@ -23,7 +17,7 @@ export class ComponentCrudService {
     }
 
     public set = async (values: FieldValues | ValuesData, uid: string): Promise<void> => {
-        const result = this.toConvert(values)
+        const result: Convert = this.toConvert(values)
         const userCollectionRef: CollectionReference = collection(db, '/taskbills')
 
         await addDoc(userCollectionRef, {

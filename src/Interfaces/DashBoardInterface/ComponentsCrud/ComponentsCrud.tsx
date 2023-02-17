@@ -7,15 +7,21 @@ export interface Items {
     id: string
 }
 
-export interface Type {
-    despesa: number
-    lucro: number
-}
-
 export interface ValuesData {
     name: string
     value: string
     startDate: string
     endDate: string
     type: string
+}
+
+export type Convert = {
+    startDate: string
+    endDate: string
+    convertValue: number
+}
+
+export interface Type {
+    despesa: number
+    lucro: number
 }

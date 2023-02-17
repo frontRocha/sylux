@@ -44,6 +44,8 @@ export default function ComponentCrud() {
 
             return err
         }
+
+        setLoader(false)
     }
 
     const handleData = async (values: FieldValues): Promise<unknown> => {
