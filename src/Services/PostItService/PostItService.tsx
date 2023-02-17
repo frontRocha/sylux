@@ -2,7 +2,7 @@ import { collection, query, where, getDocs, doc, deleteDoc, addDoc, DocumentData
 
 import { db } from "../../Mocks/FirebaseConfig"
 
-import { PostItItens } from "../../Interfaces/PostIt/PostIt"
+import { PostItItens } from "../../Interfaces/PostItInterface/PostItInterface"
 
 export class PostItService {
     public get = async (uid: string): Promise<PostItItens[]> => {

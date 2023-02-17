@@ -1,7 +1,7 @@
 import { FieldValues } from "react-hook-form";
 
 import { ComponentCrudService } from "../../../Services/DashboardServices/ComponentsCrud/ComponentsCrud";
-import { Items, ValuesData } from "../../../Interfaces/DashBoardInterface/ComponentsCrud/ComponentsCrud";
+import { Items, ValuesData } from "../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
 
 export class ComponentCrudController {
     public async getData(uid: string, type: string): Promise<Items[]> {

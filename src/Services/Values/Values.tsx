@@ -3,7 +3,7 @@ import { CollectionReference, DocumentData, DocumentReference, Query, QueryDocum
 import { db } from "../../Mocks/FirebaseConfig"
 
 import { Balance } from "../../Interfaces/DashBoardInterface/DashBoardInterface"
-import { Type } from "../../Interfaces/DashBoardInterface/ComponentsCrud/ComponentsCrud"
+import { Type } from "../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface"
 
 export class ValuesService {
   public getBalance = async (uid: string): Promise<Balance[]> => {

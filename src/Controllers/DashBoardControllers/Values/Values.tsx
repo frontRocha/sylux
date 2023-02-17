@@ -1,5 +1,5 @@
 import { Balance } from "../../../Interfaces/DashBoardInterface/DashBoardInterface";
-import { Type } from "../../../Interfaces/DashBoardInterface/ComponentsCrud/ComponentsCrud";
+import { Type } from "../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
 import { ValuesService } from "../../../Services/Values/Values"
 
 export class ValuesController {

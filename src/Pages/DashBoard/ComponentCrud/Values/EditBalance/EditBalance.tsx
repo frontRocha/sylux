@@ -8,7 +8,7 @@ import { Input } from "../../../../../Components/Input/Input"
 import { Button } from "../../../../../Components/Button/Button"
 
 import { EditBalanceController } from "../../../../../Controllers/DashBoardControllers/EditBalance/EditBalanceController"
-import { EditBalanceProps } from "../../../../../Interfaces/DashBoardInterface/EditBalance/EditBalance"
+import { EditBalanceProps } from "../../../../../Interfaces/DashBoardInterface/EditBalanceInterface/EditBalanceInterface"
 
 
 export default function EditBalance({ handleData }: EditBalanceProps) {

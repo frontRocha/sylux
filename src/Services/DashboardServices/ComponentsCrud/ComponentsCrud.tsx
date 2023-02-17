@@ -3,7 +3,7 @@ import { FieldValues } from "react-hook-form"
 
 import { db } from "../../../Mocks/FirebaseConfig"
 
-import { Convert, Items, ValuesData } from "../../../Interfaces/DashBoardInterface/ComponentsCrud/ComponentsCrud" 
+import { Convert, Items, ValuesData } from "../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface" 
 
 export class ComponentCrudService {
     public get = async (uid: string, type: string): Promise<Items[]> => {

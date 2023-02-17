@@ -10,7 +10,7 @@ import { Button } from "../../../Components/Button/Button"
 import { Input } from "../../../Components/Input/Input"
 
 import { HandleDataForm } from "../../../Controllers/DashBoardControllers/SetBalance/SetBalance"
-import { DataFormProps } from "../../../Interfaces/DashBoardInterface/SetBalance/SetBalance"
+import { DataFormProps } from "../../../Interfaces/DashBoardInterface/SetBalanceInterface/SetBalanceInterface"
 
 export default function SetBalance({ dataForm }: DataFormProps) {
 

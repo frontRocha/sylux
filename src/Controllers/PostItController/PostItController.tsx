@@ -1,5 +1,5 @@
 import { PostItService } from "../../Services/PostItService/PostItService"
-import { PostItItens } from "../../Interfaces/PostIt/PostIt"
+import { PostItItens } from "../../Interfaces/PostItInterface/PostItInterface"
 
 export class PostItController {
     public async getPostIt(uid: string): Promise<PostItItens[]> {

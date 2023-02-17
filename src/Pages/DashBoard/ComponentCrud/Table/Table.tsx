@@ -3,7 +3,7 @@ import { Trash } from "phosphor-react"
 
 import { Loader } from "../Loader/Loader"
 
-import { Items } from "../../../../Interfaces/DashBoardInterface/ComponentsCrud/ComponentsCrud"
+import { Items } from "../../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface"
 
 interface Props {
     data: Items[]

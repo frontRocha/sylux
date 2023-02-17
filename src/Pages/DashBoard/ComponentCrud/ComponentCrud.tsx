@@ -11,7 +11,7 @@ import { Loader } from "./Loader/Loader";
 import { Input } from "../../../Components/Input/Input";
 import { Button } from "../../../Components/Button/Button";
 
-import { Items } from "../../../Interfaces/DashBoardInterface/ComponentsCrud/ComponentsCrud";
+import { Items } from "../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
 import { ComponentCrudController } from "../../../Controllers/DashBoardControllers/ComponentsCrud/ComponentsCrud";
 
 import 'react-toastify/dist/ReactToastify.css';

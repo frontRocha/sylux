@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify"
 import { Button } from "../../../Components/Button/Button"
 
 import { HandleDataPostIt } from "../../../Controllers/PostItController/HandleDataPostIt/HandleDataPostIt"
-import { HandleData } from "../../../Interfaces/PostIt/PostIt"
+import { HandleData } from "../../../Interfaces/PostItInterface/PostItInterface"
 
 import './CreatePostIt.css'
 

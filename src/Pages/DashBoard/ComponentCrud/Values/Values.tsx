@@ -7,8 +7,8 @@ import { AuthFirebase } from "../../../../Context/Auth";
 
 import { ValuesController } from "../../../../Controllers/DashBoardControllers/Values/Values";
 import { Balance } from "../../../../Interfaces/DashBoardInterface/DashBoardInterface";
-import { Type } from "../../../../Interfaces/DashBoardInterface/ComponentsCrud/ComponentsCrud";
-import { List } from "../../../../Interfaces/DashBoardInterface/Values/Values";
+import { Type } from "../../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
+import { List } from "../../../../Interfaces/DashBoardInterface/ValuesInterface/ValuesInterface";
 
 
 export default function Values({ item }: List) {
