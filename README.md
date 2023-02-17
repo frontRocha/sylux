@@ -4,7 +4,7 @@
 <p>O Sylux é uma aplicação desenvolvida para ajudar na administração financeira pessoal. Com ela, é possível acompanhar suas receitas e despesas, bem como adicionar e excluir valores e filtrar por despesas e lucros. Além disso, a aplicação também possui uma página para fazer anotações.</p>
 <h2>Ilustração Visual</h2>
 <p align="center">
-  <img src="https://caminho/para/imagem.png" alt="Ilustração da aplicação">
+  <img src="https://github.com/frontRocha/sylux/blob/master/src/Assets/ilustra%C3%A7%C3%A3o.png?raw=true" alt="Ilustração da aplicação">
 </p>
 <h2>Tecnologias utilizadas</h2>
 <ul>
