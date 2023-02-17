@@ -6,7 +6,6 @@ export default function TalkMe() {
         <div>
             <NavBar />
             <section className="h-[700px] min-h-screen flex flex-col justify-center items-center">
-
                 <div className="w-full text-center">
                     <h2 className="text-xl fontRal py-4">Entre em contato comigo!</h2>
                     <div className="w-ful h-[300px] bg-primary flex items-center justify-center gap-10">
