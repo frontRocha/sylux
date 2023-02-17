@@ -1,46 +1,38 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<h1 align="center">Sylux</h1>
+<h3 align="center">Uma aplicação para administração financeira pessoal</h3>
+<h2>Apresentação</h2>
+<p>O Sylux é uma aplicação desenvolvida para ajudar na administração financeira pessoal. Com ela, é possível acompanhar suas receitas e despesas, bem como adicionar e excluir valores e filtrar por despesas e lucros. Além disso, a aplicação também possui uma página para fazer anotações.</p>
+<h2>Ilustração Visual</h2>
+<p align="center">
+  <img src="https://caminho/para/imagem.png" alt="Ilustração da aplicação">
+</p>
+<h2>Tecnologias utilizadas</h2>
+<ul>
+  <li>React</li>
+  <li>TypeScript</li>
+  <li>Tailwind CSS</li>
+  <li>Firebase</li>
+</ul>
+<h2>Funcionalidades</h2>
+<ul>
+  <li>Login com Google</li>
+  <li>Modal de saldo inicial para primeira entrada</li>
+  <li>Área para administrar finanças</li>
+  <ul>
+    <li>Acompanhamento de despesas, saldo atual e saldo inicial</li>
+    <li>Adição e exclusão de valores</li>
+    <li>Filtragem por despesa e lucro</li>
+  </ul>
+  <li>Página de notas em post-it</li>
+</ul> 
+<h2>Instalação</h2>
+<p>Para instalar o Sylux, siga os seguintes passos:</p>
+<ol>
+  <li>Clone o repositório do Github</li>
+  <li>Navegue até a pasta do projeto no terminal</li>
+  <li>Execute o comando <code>npm install</code> ou <code>yarn install</code> para instalar as dependências</li>
+  <li>Configure seu banco de dados Firebase em um arquivo .env.local</li>
+  <li>Execute o comando <code>npm start</code> ou <code>yarn start</code> para iniciar o projeto</li>
+</ol>
+<h2>Licença</h2>
+<p>O Sylux está disponível para uso livre e aberto a contribuições de todos.</p>
