@@ -28,7 +28,7 @@ tailwind.config.js
 App.test.tsx
 react-app-env.d.ts
 reportWebVitals.ts
-setpTests.ts
+setupTests.ts
 
 # files
 node_modules
