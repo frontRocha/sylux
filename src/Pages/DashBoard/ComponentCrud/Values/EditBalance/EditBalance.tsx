@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify"
 import { Input } from "../../../../../Components/Input/Input"
 import { Button } from "../../../../../Components/Button/Button"
 
-import { EditBalanceController } from "../../../../../Controllers/DashBoardControllers/EditBalance/EditBalanceController"
+import { EditBalanceController } from "../../../../../Controllers/DashBoardControllers/EditBalanceController/EditBalanceController"
 import { EditBalanceProps } from "../../../../../Interfaces/DashBoardInterface/EditBalanceInterface/EditBalanceInterface"
 
 

@@ -12,7 +12,7 @@ import { Input } from "../../../Components/Input/Input";
 import { Button } from "../../../Components/Button/Button";
 
 import { Items } from "../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
-import { ComponentCrudController } from "../../../Controllers/DashBoardControllers/ComponentsCrud/ComponentsCrud";
+import { ComponentCrudController } from "../../../Controllers/DashBoardControllers/ComponentsCrudController/ComponentsCrudController";
 
 import 'react-toastify/dist/ReactToastify.css';
 

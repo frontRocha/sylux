@@ -5,7 +5,7 @@ import Loader from "../../../../Components/Loader/Loader";
 
 import { AuthFirebase } from "../../../../Context/Auth";
 
-import { ValuesController } from "../../../../Controllers/DashBoardControllers/Values/Values";
+import { ValuesController } from "../../../../Controllers/DashBoardControllers/ValuesController/ValuesController";
 import { Balance } from "../../../../Interfaces/DashBoardInterface/DashBoardInterface";
 import { Type } from "../../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
 import { List } from "../../../../Interfaces/DashBoardInterface/ValuesInterface/ValuesInterface";

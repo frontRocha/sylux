@@ -7,7 +7,7 @@ import Loader from "../../Components/Loader/Loader";
 
 import { AuthFirebase } from "../../Context/Auth";
 
-import { PostItController } from "../../Controllers/PostItController/PostItController";
+import { PostItController } from "../../Controllers/PostItController/PostItControllerController";
 import { PostItItens } from "../../Interfaces/PostItInterface/PostItInterface";
 
 import './PostIt.css'
