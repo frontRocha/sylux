@@ -16,8 +16,8 @@ export default function Login() {
     return (
         <section className='bg-[#F6F9FC]'>
             <div className='flex justify-between h-auto min-h-screen fontRal'>
-                <h1 className='hidden md:block text-primary text-2xl font-bold py-5 px-5'>SyLux</h1>
-                <div className='hidden w-screen md:flex justify-center items-center'>
+                <h1 className='hidden md:block text-primary text-2xl font-bold py-5 px-5 relative z-50'>SyLux</h1>
+                <div className='hidden w-screen md:flex justify-center items-center z-10'>
                     <img className='md:w-[400px] lg:w-[500px]' src={imageLogin} alt="ilustração" />
                 </div>
                 <div className='w-full md:w-[500px] bg-primary md:ml-14'>

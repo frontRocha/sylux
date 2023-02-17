@@ -4,6 +4,7 @@ import { DeviceMobileCamera, Gauge, Money } from 'phosphor-react'
 
 import phoneImage from '../../Assets/celulares.png'
 import NavBar from '../../Components/Layout/NavBar/NavBar'
+import Footer from '../../Components/Layout/Footer/Footer'
 
 export default function Home() {
     return (
@@ -90,6 +91,7 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+            <Footer />
         </main>
     )
 }

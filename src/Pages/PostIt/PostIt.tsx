@@ -92,7 +92,7 @@ export default function PostIt() {
                         {postIt.map((item) => (
                             <div key={item.id} className="h-[200px] w-[200px] relative flex items-center flex-col post-it overflow-y-auto overflow-x-hidden bg-primary p-2 text-white">
                                 <span className="relative left-[75px] text-sm text-black bg-white py-2 px-2 rounded cursor-pointer" onClick={() => deletePostIt(item.id)}>{<Trash />}</span>
-                                <h1 className="text-xl pt-2 overflow-y-auto">{item.title[0].toUpperCase() + item.title.substring(1)}</h1>
+                                <h1 className="h1 text-xl pt-2 overflow-y-auto">{item.title[0].toUpperCase() + item.title.substring(1)}</h1>
                             </div>
                         ))}
                     </div>}
