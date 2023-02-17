@@ -31,7 +31,7 @@
   <li>Clone o repositório do Github</li>
   <li>Navegue até a pasta do projeto no terminal</li>
   <li>Execute o comando <code>npm install</code> ou <code>yarn install</code> para instalar as dependências</li>
-  <li>Configure seu banco de dados Firebase em um arquivo .env.local</li>
+  <li>Configure seu banco de dados Firebase em um arquivo .env</li>
   <li>Execute o comando <code>npm start</code> ou <code>yarn start</code> para iniciar o projeto</li>
 </ol>
 <h2>Licença</h2>
