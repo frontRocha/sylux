@@ -16,7 +16,7 @@ export default function CreatePostIt({ handleData }: HandleData) {
     const methods = useForm<FieldValues>()
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
-    const handleSetData = async (e: FieldValues) => {
+    const handleSetData = async (e: FieldValues): Promise<unknown> => {
         try {
             const result: string = await new HandleDataPostIt().getDataBalance(e)
 
@@ -69,7 +69,7 @@ export default function CreatePostIt({ handleData }: HandleData) {
                             >
                                 <Dialog.Panel className='relative transform overflow-hidden rounded-lg bg-primary text-left shadow-xl transition-all w-[400px] h-[500px]'>
                                     <div className='w-[90%] flex justify-end'>
-                                        <button onClick={() => setIsOpen(false)} className='text-end mt-5 py-1 px-3 rounded text-sm text-gray-500 fontRal bg-white'>x</button></div>
+                                        <button >x</button></div>
                                     <Dialog.Title className='text-center text-white text-2xl fontRal pb-10'>Criando anotação</Dialog.Title>
 
                                     <FormProvider {...methods}>

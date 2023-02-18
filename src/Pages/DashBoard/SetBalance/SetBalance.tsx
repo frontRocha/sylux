@@ -8,13 +8,15 @@ import { AuthFirebase } from "../../../Context/Auth"
 
 import { Button } from "../../../Components/Button/Button"
 import { Input } from "../../../Components/Input/Input"
+import { Label } from "../../../Components/Label/Label"
 
 import { HandleDataForm } from "../../../Controllers/DashBoardControllers/SetBalanceController/SetBalanceController"
 import { DataFormProps } from "../../../Interfaces/DashBoardInterface/SetBalanceInterface/SetBalanceInterface"
 
+
 export default function SetBalance({ dataForm }: DataFormProps) {
 
-    const methods = useForm();
+    const methods = useForm<FieldValues>();
     const { user } = useContext(AuthFirebase)
 
     let userName: string | null | undefined = user?.displayName
@@ -51,11 +53,10 @@ export default function SetBalance({ dataForm }: DataFormProps) {
                             <p className="text-gray-500 fontPop text-center px-20">Para conseguirmos lhe dar acesso ao nosso serviço, precisamos que você insira um valor de inicio. <span className="text-gray-400 text-sm">(Esse valor não será utilizado para fins lucrativo, apenas para calculos do sistema!!)</span></p>
                         </div>
                         <div className="text-center flex flex-col">
-                            <label className="text-2xl fontPop py-4">Insira o valor</label>
+                            <Label className="text-2xl fontPop py-4" htmlFor="valor" text="Insira o valor" />
+
                             <div>
-
-                                <Input placeholder="R$ 00,00" {...methods.register('valor')} type='number' className="text-center text-3xl text-primary fontPop font-bold focus:outline-none w-[50%]" />
-
+                                <Input placeholder="R$ 00,00" {...methods.register('valor')} type='number' className="text-center text-3xl text-primary fontPop font-bold focus:outline-none w-[50%]" name="valor" />
                             </div>
                         </div>
                         <Button className="text-xl text-white hover:text-primary fontRal bg-primary hover:bg-white border border-primary rounded-xl py-2 px-20 duration-300" text='Registrar' />

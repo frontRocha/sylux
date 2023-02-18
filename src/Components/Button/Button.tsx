@@ -1,4 +1,4 @@
-import { ButtonProps } from "../../Interfaces/ComponentsInterface/ButtonInterface"
+import { ButtonProps } from "../../Interfaces/ComponentsInterface/ButtonInterface/ButtonInterface"
 
 export const Button = ({ text, className, disabled }: ButtonProps) => {
 

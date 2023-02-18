@@ -3,15 +3,15 @@ import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 
+import NavBar from '../../Components/Layout/NavBar/NavBar'
+
 import checkedSucess from '../../Assets/sucess.gif'
 
 import { FeedbackController } from '../../Controllers/FeedbackController/FeedbackController'
-import NavBar from '../../Components/Layout/NavBar/NavBar'
-
 export default function Feedback() {
 
     const navigate = useNavigate()
-    const methods = useForm()
+    const methods = useForm<FieldValues>()
     const [loader, setLoader] = useState<boolean>(false)
 
     const createFeedback = async (e: FieldValues): Promise<unknown> => {

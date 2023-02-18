@@ -13,7 +13,7 @@ import { EditBalanceProps } from "../../../../../Interfaces/DashBoardInterface/E
 
 export default function EditBalance({ handleData }: EditBalanceProps) {
 
-    const methods = useForm()
+    const methods = useForm<FieldValues>()
 
     const [show, setShow] = useState<boolean>(false)
 

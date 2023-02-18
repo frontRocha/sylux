@@ -10,6 +10,7 @@ import Table from "./Table/Table";
 import { Loader } from "./Loader/Loader";
 import { Input } from "../../../Components/Input/Input";
 import { Button } from "../../../Components/Button/Button";
+import { Label } from "../../../Components/Label/Label";
 
 import { Items } from "../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
 import { ComponentCrudController } from "../../../Controllers/DashBoardControllers/ComponentsCrudController/ComponentsCrudController";
@@ -115,33 +116,32 @@ export default function ComponentCrud() {
                     <FormProvider {...methods}>
                         <form onSubmit={methods.handleSubmit(handleData)} className="bg-white w-full flex-col md:flex-row py-6 px-8 flex flex-wrap justify-center gap-5 items-start lg:items-center fontPop shadow">
                             <div className="flex flex-col">
-                                <label className="text-xs lg:text-sm text-gray-400">Nome</label>
+                                <Label className="text-xs lg:text-sm text-gray-400" htmlFor="name" text="Nome"/>
                                 <Input className="fontPop focus:outline-none bg-gray-100 text-black border border-gray-300 rounded px-4 py-1 w-[125px] xl:w-[150px]" type="text" name='name' />
                             </div>
                             <div className="flex flex-col justify-center text-gray-400">
-                                <label className="text-xs lg:text-sm">Valor</label>
+                                <Label className="text-xs lg:text-sm" htmlFor="value" text="Valor"/>
                                 <Input className="fontPop focus:outline-none bg-gray-100 text-black border border-gray-300 rounded pl-2 py-1 w-[70px] xl:w-[100px]" type="number" name='value' />
                             </div>
                             <div className='flex flex-col justify-center text-gray-400'>
-                                <label className="text-xs lg:text-sm">data inicio</label>
+                                <Label className="text-xs lg:text-sm" htmlFor="startDate" text="Data de inicio"/>
                                 <Input className='focus:outline-none text-xs lg:text-base' type="date" name='startDate' />
                             </div>
                             <div className='flex flex-col justify-center text-gray-400'>
-                                <label className="text-xs lg:text-sm">data vencimento</label>
+                                <Label className="text-xs lg:text-sm" htmlFor="endDate" text="Data de vencimento"/>
                                 <Input className='focus:outline-none text-xs lg:text-base' type="date" name="endDate" />
                             </div>
                             <div className="flex flex-col justify-center">
-                                <label className="text-xs lg:text-sm text-gray-400">Tipo</label>
+                                <Label className="text-xs lg:text-sm text-gray-400" htmlFor="type" text="Tipo"/>
 
                                 <div className="flex gap-4">
                                     <div className="flex gap-2">
                                         <Input className="" type="radio" value='despesa' name="type" />
-
-                                        <label className="text-[#A0616A] text-xs lg:text-sm" htmlFor="despesa">Despesa</label>
+                                        <Label className="text-[#A0616A] text-xs lg:text-sm" htmlFor="despesa" text="Despesa"/>
                                     </div>
                                     <div className="flex gap-2">
                                         <Input className="" type="radio" value='lucro' name="type" />
-                                        <label className="text-primary text-xs lg:text-sm" htmlFor="lucro">Lucro</label>
+                                        <Label className="text-primary text-xs lg:text-sm" htmlFor="lucro" text="Lucro"/>
                                     </div>
                                 </div>
                             </div>
@@ -155,10 +155,10 @@ export default function ComponentCrud() {
                     <p className='text-sm font-ral'>Filtrar por:</p>
 
                     <input onClick={() => setType('despesa')} type="radio" className="stv-radio-tab absolute left-[-99999em] top-[-99999em]" name="radioTabTest" value="1" id="tab1" defaultChecked />
-                    <label className='pointer float-left rounded rounded-b-none border border-primary border-b-none bg-white hover:bg-gray-100 duration-300 mr-[-1px] py-[.5em] px-[1em] relative' htmlFor="tab1">Depesa</label>
+                    <Label className='pointer float-left rounded rounded-b-none border border-primary border-b-none bg-white hover:bg-gray-100 duration-300 mr-[-1px] py-[.5em] px-[1em] relative' htmlFor="tab1" text="Despesa"/>
 
                     <input onClick={() => setType('lucro')} type="radio" className="stv-radio-tab absolute left-[-99999em] top-[-99999em]" name="radioTabTest" value="2" id="tab2" />
-                    <label className='pointer float-left rounded rounded-b-none border border-primary border-b-none bg-white hover:bg-gray-100 duration-300 mr-[-1px] py-[.5em] px-[1em] relative' htmlFor="tab2">Lucro</label>
+                    <Label className='pointer float-left rounded rounded-b-none border border-primary border-b-none bg-white hover:bg-gray-100 duration-300 mr-[-1px] py-[.5em] px-[1em] relative' htmlFor="tab2" text="Lucro"/>
                 </div>
 
                 <Table data={todos} sendId={deleteItem} />
