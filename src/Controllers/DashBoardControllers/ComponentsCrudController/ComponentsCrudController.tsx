@@ -1,6 +1,6 @@
 import { FieldValues } from "react-hook-form";
 
-import { ComponentCrudService } from "../../../Services/DashboardServices/ComponentsCrud/ComponentsCrud";
+import { ComponentCrudService } from "../../../Services/DashboardServices/ComponentsCrudService/ComponentsCrudService";
 import { Items, ValuesData } from "../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
 
 export class ComponentCrudController {

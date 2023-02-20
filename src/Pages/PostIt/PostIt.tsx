@@ -15,7 +15,7 @@ import './PostIt.css'
 export default function PostIt() {
 
     const [postIt, setPostIt] = useState<PostItItens[]>([])
-    const [loader, setLoader] = useState(false)
+    const [loader, setLoader] = useState<boolean>(false)
 
     const { user } = useContext(AuthFirebase)
 
