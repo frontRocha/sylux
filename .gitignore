@@ -1,13 +1,18 @@
+.env
+
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
+.env
 
 # testing
 /coverage
+.env
 
 # production
 /build
+.env
 
 # misc
 .DS_Store
@@ -16,10 +21,12 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.env
 
 # arquivos
 package-lock.json
@@ -29,6 +36,8 @@ App.test.tsx
 react-app-env.d.ts
 reportWebVitals.ts
 setupTests.ts
+.env
 
 # files
 node_modules
+.env
