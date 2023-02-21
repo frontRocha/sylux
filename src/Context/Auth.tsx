@@ -34,7 +34,7 @@ export default function AuthFirebaseProvider({ children }: AuthChildren) {
             <Navigate to="/dashboard" />
 
             return receiveDataUser();
-        } catch (err) {
+        } catch (err: unknown) {
             if (err instanceof Error) {
                 console.error(err.message)
             }

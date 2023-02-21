@@ -92,7 +92,7 @@ export default function ComponentCrud() {
             toast.success('Deletado com sucesso')
 
             await getTodos()
-        } catch (err) {
+        } catch (err: unknown) {
             if (err instanceof Error) {
                 console.error(err.message)
             }

@@ -26,7 +26,7 @@ export default function DashBoard() {
                 setBalance(data)
             }
 
-        } catch (err) {
+        } catch (err: unknown) {
             if (err instanceof Error) {
                 console.error(err.message)
             }
@@ -46,7 +46,7 @@ export default function DashBoard() {
 
                 await getBalance()
             }
-        } catch (err) {
+        } catch (err: unknown) {
             if (err instanceof Error) {
                 console.error(err.message)
             }

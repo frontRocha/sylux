@@ -55,12 +55,12 @@ export default function Values({ item }: List) {
         } catch (err: unknown) {
             if (err instanceof Error) {
                 console.error(err.message)
-
-                return err
             }
 
-            setLoader(false)
+            return err
         }
+
+        setLoader(false)
     }
 
     const editCurrentBalance = async (e: string[]): Promise<unknown> => {
@@ -71,7 +71,9 @@ export default function Values({ item }: List) {
 
             await getValues()
         } catch (err: unknown) {
-            if (err instanceof Error) console.error(err.message)
+            if (err instanceof Error) {
+                console.error(err.message)
+            }
 
             return err
         }

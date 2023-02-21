@@ -20,8 +20,12 @@ export class AuthContextService {
 
                 return user
             })
-            .catch(err => {
-                return err.message
+            .catch((err: unknown) => {
+                if(err instanceof Error) {
+                    console.error(err.message)
+                }
+
+                return err
             })
     }
 }
