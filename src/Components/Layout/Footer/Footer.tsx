@@ -3,7 +3,7 @@ import { RiWhatsappFill } from 'react-icons/ri'
 
 export default function Footer() {
     return (
-        <footer className="bg-black py-20 fontRal mt-20">
+        <footer className="bg-black py-20 fontPop mt-20">
             <h4 className="text-white text-center text-4xl">SyLux</h4>
             <p className="text-white font-sm text-center my-10">Uma jornada de mil quilômetros precisa <br />
                 começar com um simples passo.</p>

@@ -1,22 +1,40 @@
-import { PostItService } from "../../Services/PostItService/PostItService"
 import { PostItItens } from "../../Interfaces/PostItInterface/PostItInterface"
+import { IDataService } from "../../Interfaces/DataServiceRequisition/DataServiceRequisition";
 
 export class PostItController {
-    public async getPostIt(uid: string): Promise<PostItItens[]> {
-        const result: PostItItens[] = await new PostItService().get(uid)
+    private _firestoreService: IDataService<PostItItens>;
+    private _route: string;
+    private _userUid: string;
 
-        return result
+    constructor(firestoreService: IDataService<PostItItens>, route: string, userUid: string) {
+        this._firestoreService = firestoreService;
+        this._route = route;
+        this._userUid = userUid;
     }
 
-    public async deletePostIt(id: string): Promise<void> {
-        const result: void = await new PostItService().delete(id)
+    async getData(): Promise<PostItItens[]> {
+        try {
+            const fetchedData = await this._firestoreService.getData({ route: this._route, userUid: this._userUid });
 
-        return result
+            return fetchedData;
+        } catch (err) {
+            throw err
+        }
     }
 
-    public async setPostIt(uid: string, title: string): Promise<void> {
-        const result: void = await new PostItService().set(uid, title)
+    async deleteData(id: string): Promise<void> {
+        try {
+            const fetchedData = await this._firestoreService.deleteData({ route: this._route, userUid: this._userUid, id })
+        } catch (err) {
+            throw err
+        }
+    }
 
-        return result
+    async createData(title: string): Promise<void> {
+        try {
+            const fetchedData = await this._firestoreService.createData({ route: this._route, userUid: this._userUid, title })
+        } catch (err) {
+            throw err
+        }
     }
 }

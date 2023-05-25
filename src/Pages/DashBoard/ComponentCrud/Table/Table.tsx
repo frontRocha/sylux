@@ -23,13 +23,21 @@ export default function Table({ data, sendId }: Props) {
     const getData = async (): Promise<void> => {
         setVetor(Object.values(data))
 
-        setLoader(false)
+        hideLoader()
     }
 
     const receiveId = (id: string): void => {
-        setLoader(true)
-
         sendId(id)
+
+        showLoader()
+    }
+
+    const showLoader = () => {
+        setLoader(true)
+    }
+
+    const hideLoader = () => {
+        setLoader(false)
     }
 
     return (

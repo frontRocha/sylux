@@ -11,6 +11,9 @@ import { PostItController } from "../../Controllers/PostItController/PostItContr
 import { PostItItens } from "../../Interfaces/PostItInterface/PostItInterface";
 
 import './PostIt.css'
+import { DataServiceRequisition } from "../../Services/DataServiceRegistration/DataServiceRequisition";
+import { handleBusinessError, verifyValidateUser } from "../../Utils/HandleBusinessError/HandleBusinessError";
+import { createControllerInstance } from "../../Utils/CreateComponentCrudController/CreateComponentCrudController";
 
 export default function PostIt() {
 
@@ -20,74 +23,105 @@ export default function PostIt() {
     const { user } = useContext(AuthFirebase)
 
     useEffect(() => {
-        setLoader(true)
+        showLoader()
         getPostIt()
     }, [])
 
-    const getPostIt = async (): Promise<unknown> => {
+    const firestoreService = new DataServiceRequisition();
+
+    const getPostIt = async (): Promise<void> => {
         try {
-            if (user?.uid) {
-                const result: PostItItens[] = await new PostItController().getPostIt(user?.uid)
-
-                setPostIt(result)
-            }
-        } catch (err: unknown) {
+            const uid = verifyValidateUser(user?.uid)
+            const instanceMethod = createControllerInstance(PostItController, firestoreService, 'postit', uid)
+            await fetchData(instanceMethod)
+        } catch (err) {
             if (err instanceof Error) {
-                console.error(err.message)
+                handleBusinessError(err)
             }
-
-            return err
+        } finally {
+            hideLoader()
         }
-
-        setLoader(false)
     }
 
     const deletePostIt = async (id: string): Promise<unknown> => {
         try {
-            setLoader(true)
+            showLoader()
+            const uid = verifyValidateUser(user?.uid)
+            const instanceMethod = createControllerInstance(PostItController, firestoreService, 'postit', uid)
+            await deleteDataToDatabase(instanceMethod, id)
 
-            const result: void = await new PostItController().deletePostIt(id)
+            await getPostIt()
         } catch (err: unknown) {
             if (err instanceof Error) {
-                console.error(err.message)
+                handleBusinessError(err)
             }
 
             return err
         }
-
-        await getPostIt()
     }
 
-    const createPostIt = async (title: string): Promise<unknown> => {
+    const handleData = async (title: string): Promise<unknown> => {
         try {
-            setLoader(true)
+            showLoader()
+            const uid = verifyValidateUser(user?.uid)
+            const instanceMethod = createControllerInstance(PostItController, firestoreService, 'postit', uid)
+            await sendDataToDatabase(instanceMethod, title)
 
-            if (user?.uid) {
-                const result: void = await new PostItController().setPostIt(user?.uid, title)
-            }
-
+            await getPostIt()
         } catch (err: unknown) {
             if (err instanceof Error) {
-                console.error(err.message)
+                handleBusinessError(err)
             }
 
             return err
         }
+    }
 
-        await getPostIt()
+    const deleteDataToDatabase = async (instanceMethod: PostItController, id: string) => {
+        try {
+            const method = await instanceMethod.deleteData(id)
+        } catch (err) {
+            throw err
+        }
+    }
+
+    const sendDataToDatabase = async (instanceMethod: PostItController, title: string) => {
+        try {
+            const method = await instanceMethod.createData(title)
+        } catch (err) {
+            throw err
+        }
+    }
+
+    const fetchData = async (instanceMethod: PostItController): Promise<void> => {
+        try {
+            const method = await instanceMethod.getData()
+
+            setPostIt(method)
+        } catch (err: unknown) {
+            throw err
+        }
+    }
+
+    const showLoader = () => {
+        setLoader(true)
+    }
+
+    const hideLoader = () => {
+        setLoader(false)
     }
 
     return (
         <div className="ml-4 md:ml-28">
             <div className="flex justify-between items-center mr-4  py-5">
-                <h2 className="fontRal text-xl">Anotações</h2>
-                <CreatePostIt handleData={createPostIt} />
+                <h2 className="fontPop text-xl">Anotações</h2>
+                <CreatePostIt sendData={handleData} />
             </div>
             {loader ? <div className="h-screen w-full flex flex-col items-center justify-center">
                 <Loader />
-                <span className="text-sm text-primary fontRal my-2">Carregando PostIts</span>
+                <span className="text-sm text-primary fontPop my-2">Carregando PostIts</span>
             </div> :
-                !postIt.length ? <span className="flex flex-col items-center justify-center h-screen w-full text-2xl text-primary fontRal">Adicione uma anotação</span> :
+                !postIt.length ? <span className="flex flex-col items-center justify-center h-screen w-full text-2xl text-primary fontPop">Adicione uma anotação</span> :
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 place-items-center place-content-start h-screen gap-4 my-2">
                         {postIt.map((item) => (
                             <div key={item.id} className="h-[200px] w-[200px] relative flex items-center flex-col post-it overflow-y-auto overflow-x-hidden bg-primary p-2 text-white">

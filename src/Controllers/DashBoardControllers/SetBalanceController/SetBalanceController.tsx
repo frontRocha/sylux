@@ -1,14 +1,18 @@
 import { FieldValues } from "react-hook-form";
 
 export class HandleDataForm {
-    public async getDataBalance(value: FieldValues): Promise<number> {
-        const validate: number = validateForm(value.valor)
+    public async validateValue(value: FieldValues): Promise<number> {
+        try {
+            const validate: number = validateValue(value.valor)
 
-        return validate
+            return validate
+        } catch (err) {
+            throw err
+        }
     }
 }
 
-const validateForm = (value: string): number => {
+const validateValue = (value: string): number => {
     if (!value.length) {
         throw new Error('Insira um valor')
     }

@@ -1,13 +1,19 @@
 export class EditBalanceController {
-    public async handleValueBalance(value: number): Promise<number> {
-        return this.validateBalance(value)
-    }
+    public async validateData(value: number): Promise<number> {
+        try {
+            const runValidate = validateData(value)
 
-    public validateBalance(value: number): number {
-        if (!value) {
-            throw new Error('Adicione um valor')
+            return runValidate
+        } catch(err) {
+            throw err
         }
-
-        return value
     }
+}
+
+const validateData = (value: number) => {
+    if (!value) {
+        throw new Error('Adicione um valor')
+    }
+
+    return value
 }

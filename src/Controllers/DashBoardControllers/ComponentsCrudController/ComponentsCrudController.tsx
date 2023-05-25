@@ -1,29 +1,44 @@
 import { FieldValues } from "react-hook-form";
 
-import { ComponentCrudService } from "../../../Services/DashboardServices/ComponentsCrudService/ComponentsCrudService";
 import { Items, ValuesData } from "../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
+import { IDataService } from "../../../Interfaces/DataServiceRequisition/DataServiceRequisition";
 
 export class ComponentCrudController {
-    public async getData(uid: string, type: string): Promise<Items[]> {
-        const result: Items[] = await new ComponentCrudService().get(uid, type)
+    private _firestoreService: IDataService<Items>;
+    private _route: string;
+    private _userUid: string;
 
-        return result
+    constructor(firestoreService: IDataService<Items>, route: string, userUid: string) {
+        this._firestoreService = firestoreService;
+        this._route = route;
+        this._userUid = userUid;
     }
 
-    public async handleData(values: FieldValues, uid: string): Promise<void> {
-        const validate: boolean | Error = await this.validateData(values)
+    async getData(): Promise<Items[]> {
+        try {
+            const fetchedData = await this._firestoreService.getData({ route: this._route, userUid: this._userUid });
 
-        if(validate) {
-            const result: void = await new ComponentCrudService().set(values, uid)
-        
-            return result
+            return fetchedData;
+        } catch(err) {
+            throw err
         }
     }
 
-    public async deleteData(id: string): Promise<void> {
-        const result: void = await new ComponentCrudService().delete(id)    
+    async deleteData(id: string): Promise<void> {
+        try {
+            const fetchedData = await this._firestoreService.deleteData({ route: this._route, userUid: this._userUid, id })
+        } catch(err) {
+            throw err
+        }
+        
+    }
 
-        return result
+    async createData(values: FieldValues): Promise<void> {
+        try {
+            const fetchedData = await this._firestoreService.createData({ route: this._route, userUid: this._userUid, endDate: values.endDate, name: values.name, startDate: values.startDate, type: values.type, value: values.value })
+        } catch(err) {
+            throw err
+        }
     }
 
     public validateData = async (values: ValuesData | FieldValues): Promise<boolean | Error> => {

@@ -21,7 +21,9 @@ export default function EditBalance({ handleData }: EditBalanceProps) {
 
     const setShowOff = (): void => {
         setShow(false)
+    }
 
+    const resetValuesForm = () => {
         methods.reset({
             valor: ''
         })
@@ -29,10 +31,11 @@ export default function EditBalance({ handleData }: EditBalanceProps) {
 
     const handleBalance = async (e: FieldValues): Promise<unknown> => {
         try {
-            const result = await new EditBalanceController().handleValueBalance(e.valor)
-            handleData(result.toString())
+            const validateData = await new EditBalanceController().validateData(e.valor)
+            handleData(validateData.toString())
+            
             setShowOff()
-
+            resetValuesForm()
         } catch (err: unknown) {
             if (err instanceof Error) {
                 toast.error(err.message)
@@ -76,14 +79,14 @@ export default function EditBalance({ handleData }: EditBalanceProps) {
                                 >
                                     <Dialog.Panel className='relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-[400px] h-[500px]'>
                                         <div className='w-[90%] flex justify-end'>
-                                            <button onClick={() => setShow(false)} className='text-end mt-5 py-1 px-3 rounded text-sm text-gray-500 fontRal bg-white'>x</button></div>
-                                        <Dialog.Title className='text-center text-primary text-2xl fontRal py-10'>Alterar valor inicial</Dialog.Title>
+                                            <button onClick={() => setShow(false)} className='text-end mt-5 py-1 px-3 rounded text-sm text-gray-500 fontPop bg-white'>x</button></div>
+                                        <Dialog.Title className='text-center text-primary text-2xl fontPop py-10'>Alterar valor inicial</Dialog.Title>
                                         <div className='flex flex-col items-center justify-between h-[300px]'>
                                             <FormProvider {...methods}>
                                                 <form className="px-6 py-6 lg:px-8 flex flex-col items-center" onSubmit={methods.handleSubmit(handleBalance)}>
                                                     <Input name="valor" type='number' placeholder="$00,00" className="text-center text-3xl text-primary fontPop font-bold focus:outline-none w-[50%] my-10" />
 
-                                                    <Button className="text-xl text-white hover:text-primary fontRal bg-primary hover:bg-white border border-primary rounded-xl py-2 px-20 duration-300 mt-10" text='Enviar' />
+                                                    <Button className="text-xl text-white hover:text-primary fontPop bg-primary hover:bg-white border border-primary rounded-xl py-2 px-20 duration-300 mt-10" text='Enviar' />
                                                 </form>
                                             </FormProvider>
                                         </div>

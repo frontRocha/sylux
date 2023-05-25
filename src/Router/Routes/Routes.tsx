@@ -46,8 +46,8 @@ export const Index = () => {
 
                 <Route path='/feedback' element={<Feedback />} />
 
-                <Route path='talkme' element={<TalkMe />}/>
-                
+                <Route path='talkme' element={<TalkMe />} />
+
 
             </Routes>
         </BrowserRouter>

@@ -1,24 +1,39 @@
 import { FieldValues } from "react-hook-form"
-import { FeedbackService } from "../../Services/FeedbackService/FeedbackService"
+import { IDataService } from "../../Interfaces/DataServiceRequisition/DataServiceRequisition";
 
 export class FeedbackController {
-    public async handleData(description: string): Promise<void> {
-        const result: void = await new FeedbackService().set(description)
 
-        return result
+    private _firestoreService: IDataService<void>;
+    private _route: string;
+    private _userUid: string;
+
+    constructor(firestoreService: IDataService<void>, route: string, userUid: string) {
+        this._firestoreService = firestoreService;
+        this._route = route;
+        this._userUid = userUid
     }
 
-    public validate(e: FieldValues): string | undefined {
-        const result: string | undefined = runValidate(e.description)
+    public async setData(description: string): Promise<void> {
+        try {
+            await this._firestoreService.createData({ route: this._route, userUid: this._userUid, description })
+        } catch (err) {
+            throw err
+        }
+    }
 
-        if(result) {
+    public validate(e: FieldValues): string {
+        try {
+            const result: string = runValidate(e.description)
+
             return result
+        } catch (err) {
+            throw err
         }
     }
 }
 
 const runValidate = (description: string): string => {
-    if(description.length < 4) {
+    if (description.length < 4) {
         throw new Error('Digite algo válido')
     }
 

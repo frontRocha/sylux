@@ -7,41 +7,50 @@ import { ToastContainer, toast } from "react-toastify"
 import { Button } from "../../../Components/Button/Button"
 
 import { HandleDataPostIt } from "../../../Controllers/PostItController/HandleDataPostItController/HandleDataPostItController"
-import { HandleData } from "../../../Interfaces/PostItInterface/PostItInterface"
+import { Props } from "../../../Interfaces/PostItInterface/PostItInterface"
 
 import './CreatePostIt.css'
+import { handleBusinessError } from '../../../Utils/HandleBusinessError/HandleBusinessError'
 
-export default function CreatePostIt({ handleData }: HandleData) {
+export default function CreatePostIt({ sendData }: Props) {
 
     const methods = useForm<FieldValues>()
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
-    const handleSetData = async (e: FieldValues): Promise<unknown> => {
+    const handleDataForm = async (values: FieldValues): Promise<unknown> => {
         try {
-            const result: string = await new HandleDataPostIt().getDataBalance(e)
+            const validateData: string = await new HandleDataPostIt().validateTitle(values.title)
 
-            handleData(result)
-
-            methods.reset({
-                title: ''
-            })
-
+            sendData(values.title)
+            closeModal()
+            resetValues()
         } catch (err: unknown) {
             if (err instanceof Error) {
-                toast.error(err.message)
-                console.error(err.message)
+                handleBusinessError(err)
             }
 
             return err
         }
+    }
 
+    const resetValues = () => {
+        resetDataForm()
+    }
+
+    const resetDataForm = () => {
+        methods.reset({
+            title: ''
+        })
+    }
+
+    const closeModal = () => {
         setIsOpen(false)
     }
 
     return (
         <div>
             <ToastContainer />
-            <button onClick={() => setIsOpen(true)} className="bg-primary py-2 px-4 rounded-2xl text-white text-sm fontRal">Criar anotação</button>
+            <button onClick={() => setIsOpen(true)} className="bg-primary py-2 px-4 rounded-2xl text-white text-sm fontPop">Criar anotação</button>
             <Transition.Root show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={setIsOpen}>
                     <Transition.Child
@@ -70,10 +79,10 @@ export default function CreatePostIt({ handleData }: HandleData) {
                                 <Dialog.Panel className='relative transform overflow-hidden rounded-lg bg-primary text-left shadow-xl transition-all w-[400px] h-[500px]'>
                                     <div className='w-[90%] flex justify-end'>
                                         <button >x</button></div>
-                                    <Dialog.Title className='text-center text-white text-2xl fontRal pb-10'>Criando anotação</Dialog.Title>
+                                    <Dialog.Title className='text-center text-white text-2xl fontPop pb-10'>Criando anotação</Dialog.Title>
 
                                     <FormProvider {...methods}>
-                                        <form className='flex flex-col items-center justify-between h-[300px]' onSubmit={methods.handleSubmit(handleSetData)}>
+                                        <form className='flex flex-col items-center justify-between h-[300px]' onSubmit={methods.handleSubmit(handleDataForm)}>
                                             <div className='flex flex-col w-[70%]'>
                                                 <textarea placeholder="Digite aqui" {...methods.register('title')} className='resize-none text min-h-[300px] max-h-[300px] bg-transparent outline-none text-3xl text-white'></textarea>
                                             </div>

@@ -1,5 +1,5 @@
 export interface Balance {
-    balance: number
+    value: number
     id: string
     uid: string
 }

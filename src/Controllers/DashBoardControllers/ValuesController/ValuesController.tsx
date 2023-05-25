@@ -1,26 +1,38 @@
 import { Balance } from "../../../Interfaces/DashBoardInterface/DashBoardInterface";
 import { Type } from "../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
-import { ValuesService } from "../../../Services/ValuesService/ValuesService"
+import { DataServiceRequisition } from "../../../Services/DataServiceRegistration/DataServiceRequisition";
+import { IDataService } from "../../../Interfaces/DataServiceRequisition/DataServiceRequisition";
 
 export class ValuesController {
-    public async handleValues(uid: string): Promise<Balance[]> {
-        const result: Balance[] = await new ValuesService().getBalance(uid)
 
-        return result
+    private _firestoreService: IDataService<Balance>;
+    private _route: string;
+    private _userUid: string;
+
+    constructor(firestoreService: IDataService<Balance>, route: string, userUid: string) {
+        this._firestoreService = firestoreService;
+        this._route = route;
+        this._userUid = userUid
     }
 
-    public async handleTypesValues(uid: string) {
-        const result: Type = await new ValuesService().getTypeValues(uid);
+    public async getDataOpeningBalance(): Promise<Balance[]> {
+        try {
+            const fetchedData: Balance[] = await this._firestoreService.getData({ route: this._route, userUid: this._userUid })
 
-
-        return result
+            return fetchedData
+        } catch(err) {
+            throw err
+        }
     }
 
-    public async editBalance(value: string, id: string): Promise<void> {
-        const convert: number = parseFloat(value)
+    public async editBalance(balance: string, id: string): Promise<void> {
+        try {
+            const value: number = parseFloat(balance)
+            const fetchedData = await this._firestoreService.editData({ route: this._route, userUid: this._userUid, value, id })
 
-        const result: void = await new ValuesService().editBalance(convert, id)
-
-        return result
+            return fetchedData
+        } catch(err) {
+            throw err
+        }
     }
 }

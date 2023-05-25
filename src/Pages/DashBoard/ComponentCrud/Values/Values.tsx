@@ -9,6 +9,10 @@ import { ValuesController } from "../../../../Controllers/DashBoardControllers/V
 import { Balance } from "../../../../Interfaces/DashBoardInterface/DashBoardInterface";
 import { Type } from "../../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
 import { List } from "../../../../Interfaces/DashBoardInterface/ValuesInterface/ValuesInterface";
+import { handleBusinessError, verifyValidateUser } from "../../../../Utils/HandleBusinessError/HandleBusinessError";
+import { DataServiceRequisition } from "../../../../Services/DataServiceRegistration/DataServiceRequisition";
+import { TypeValuesController } from "../../../../Controllers/TypeValuesController/TypeValuesController";
+import { createControllerInstance } from "../../../../Utils/CreateComponentCrudController/CreateComponentCrudController";
 
 
 export default function Values({ item }: List) {
@@ -22,39 +26,37 @@ export default function Values({ item }: List) {
     })
 
     useEffect(() => {
-        setLoader(true)
+        showLoader()
         getValues()
     }, [item])
 
+    const firestoreService = new DataServiceRequisition();
+
     const getValues = async (): Promise<unknown> => {
         try {
-            if (user?.uid) {
-                const result: Balance[] = await new ValuesController().handleValues(user?.uid)
+            const uid = verifyValidateUser(user?.uid)
+            const instanceMethod = createControllerInstance(ValuesController, firestoreService, 'openingbalance', uid)
+            await fetchDataOpeningBalance(instanceMethod)
+            await setTypeValues()
 
-                setSaldo(result)
-                await setTypeValues()
-
-                setLoader(false)
-            }
+            hideLoader()
         } catch (err: unknown) {
             if (err instanceof Error) {
-                console.error(err.message)
+                handleBusinessError(err)
             }
 
             return err
         }
-
     }
 
     const setTypeValues = async (): Promise<unknown> => {
         try {
-            if (user?.uid) {
-                const result: Type = await new ValuesController().handleTypesValues(user.uid)
-                setType({ ...type, despesa: result.despesa, lucro: result.lucro })
-            }
+            const uid = verifyValidateUser(user?.uid)
+            await fetchDataTaskBills(uid)
+
         } catch (err: unknown) {
             if (err instanceof Error) {
-                console.error(err.message)
+                handleBusinessError(err)
             }
 
             return err
@@ -63,25 +65,62 @@ export default function Values({ item }: List) {
         setLoader(false)
     }
 
-    const editCurrentBalance = async (e: string[]): Promise<unknown> => {
-        setLoader(true)
-
+    const editCurrentBalance = async (value: string, id: string): Promise<unknown> => {
         try {
-            await new ValuesController().editBalance(e[0], e[1])
+            showLoader()
+            const uid = verifyValidateUser(user?.uid)
+            const instanceMethod = createControllerInstance(ValuesController, firestoreService, 'openingbalance', uid)
+            await editDataOnDatabase(instanceMethod, value, id)
 
             await getValues()
         } catch (err: unknown) {
             if (err instanceof Error) {
-                console.error(err.message)
+                handleBusinessError(err)
             }
 
             return err
+        } finally {
+            hideLoader()
         }
+    }
 
+    const fetchDataOpeningBalance = async (instanceMethod: ValuesController) => {
+        try {
+            const result: Balance[] = await instanceMethod.getDataOpeningBalance()
+
+            setSaldo(result)
+        } catch (err) {
+            throw err
+        }
+    }
+
+    const fetchDataTaskBills = async (uid: string) => {
+        try {
+            const result = await new TypeValuesController(uid).handleTypesValues()
+
+            setType({ ...type, despesa: result.despesa, lucro: result.lucro })
+        } catch (err) {
+            throw err
+        }
+    }
+
+    const editDataOnDatabase = async (instanceMethod: ValuesController, value: string, id: string) => {
+        try {
+            await instanceMethod.editBalance(value, id)
+        } catch (err) {
+            throw err
+        }
+    }
+
+    const showLoader = () => {
+        setLoader(true)
+    }
+
+    const hideLoader = () => {
         setLoader(false)
     }
 
-    const balance: number[] = saldo.map(({ balance }) => balance)
+    const balance: number[] = saldo.map(({ value }) => value)
 
     const currentBalance: number = balance[0] - type.despesa + type.lucro
 
@@ -92,9 +131,9 @@ export default function Values({ item }: List) {
                     {loader ? <Loader /> :
                         saldo.map((item: Balance) => (
                             <div className="text-center" key={item.id}>
-                                <EditBalance handleData={(e: string) => editCurrentBalance([e, item.id])} />
-                                <h3 className="text-primary text-2xl xl:text-3xl font-sans">R$ {item.balance.toLocaleString('pt-BR')}</h3>
-                                <p className="fontRal text-sm text-bold">saldo inicial</p>
+                                <EditBalance handleData={(e: string) => editCurrentBalance(e, item.id)} />
+                                <h3 className="text-primary text-2xl xl:text-3xl font-sans">R$ {item.value.toLocaleString('pt-BR')}</h3>
+                                <p className="fontPop text-sm font-light">saldo inicial</p>
                             </div>
                         ))}
                 </div>
@@ -104,7 +143,7 @@ export default function Values({ item }: List) {
                         <Loader /> :
                         <div className="text-center">
                             <h3 className={`text-2xl xl:text-3xl font-sans ${balance[0] > currentBalance ? 'text-[#A0616A]' : 'text-primary'}`}>R$ {currentBalance.toLocaleString('pt-BR')}</h3>
-                            <p className="fontRal text-sm text-bold">saldo atual</p>
+                            <p className="fontPop text-sm font-light">saldo atual</p>
                         </div>
                     }
                 </div>
@@ -114,7 +153,7 @@ export default function Values({ item }: List) {
                         <Loader /> :
                         <div className="text-center">
                             <h3 className="text-[#A0616A] text-2xl xl:text-3xl font-sans">R$ {type.despesa.toLocaleString('pt-BR')}</h3>
-                            <p className="fontRal text-sm text-bold">valor de despesas</p>
+                            <p className="fontPop text-sm font-light">valor de despesas</p>
                         </div>
                     }
                 </div>

@@ -5,6 +5,7 @@ import { User } from 'firebase/auth'
 
 import { AuthContextController } from '../Controllers/AuthContextController/AuthContextController'
 import { AuthChildren, AuthContext } from '../Interfaces/ContextInterface/ContextInterface'
+import { handleBusinessError } from '../Utils/HandleBusinessError/HandleBusinessError'
 
 export const AuthFirebase = createContext({} as AuthContext)
 
@@ -24,7 +25,7 @@ export default function AuthFirebaseProvider({ children }: AuthChildren) {
             setUser(JSON.parse(receiveUser))
         }
 
-        setLoading(false)
+        hideLoader()
     }
 
     const runAuth = async (): Promise<void | unknown> => {
@@ -36,7 +37,7 @@ export default function AuthFirebaseProvider({ children }: AuthChildren) {
             return receiveDataUser();
         } catch (err: unknown) {
             if (err instanceof Error) {
-                console.error(err.message)
+                handleBusinessError(err)
             }
 
             return err
@@ -48,6 +49,10 @@ export default function AuthFirebaseProvider({ children }: AuthChildren) {
         setUser(undefined);
 
         <Navigate to="/login" />
+    }
+
+    const hideLoader = () => {
+        setLoading(false)
     }
 
     return (

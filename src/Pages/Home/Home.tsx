@@ -11,7 +11,7 @@ export default function Home() {
         <main>
             <NavBar />
             <section className="bg-[url('Assets/Rectangle1.png')] bg-no-repeat bg-banner-mobile sm:bg-banner bg-cover w-full h-screen px-10">
-                <div className="fontRal flex sm:flex-row flex-col justify-around sm:items-center h-screen max-w-[1400px] mx-auto">
+                <div className="fontPop flex sm:flex-row flex-col justify-around sm:items-center h-screen max-w-[1400px] mx-auto">
                     <div>
                         <h1 className='text-4xl lg:text-6xl text-white font-thin leading-tight'>Gerencie <strong className='text-black font-bold'>seu</strong> <br /> <strong className='text-black font-bold'>bolso</strong> com <strong className='font-bold'>apenas</strong> <br /> <strong className='font-bold'>um clique</strong>!</h1>
                         <p className='text-white text-xl mt-5 mb-5'>Gerenciar seu dinheiro <br />
@@ -22,7 +22,7 @@ export default function Home() {
                 </div>
             </section>
             <section className='mb-20 px-10 py-10'>
-                <div className='max-w-[1400px] fontRal mx-auto'>
+                <div className='max-w-[1400px] fontPop mx-auto'>
                     <h2 className='text-primary text-sm mb-3 font-bold'>Nosso sistema</h2>
                     <p className='text-xl sm:text-3xl font-semibold mb-10'>Uma forma rápida e fácil <br />
                         para que você tenha o <br />
@@ -40,7 +40,7 @@ export default function Home() {
                 </div>
             </section>
             <section className='bg-[url("Assets/Rectangle3.png")] bg-no-repeat bg-cover w-full h-screen flex items-center justify-center mb-20 px-10'>
-                <div className='max-w-[1400px] flex flex-wrap items-center justify-center fontRal gap-2 sm:gap-20 text-white'>
+                <div className='max-w-[1400px] flex flex-wrap items-center justify-center fontPop gap-2 sm:gap-20 text-white'>
                     <div className='max-w-[200px] flex flex-col items-center justify-center text-center gap-5 sm:gap-10'>
                         <div className='w-[50px] h-[50px] bg-blue-100 rounded-full flex items-center justify-center text-blue-700 text-2xl'><DeviceMobileCamera /></div>
                         <p className='text-sm'>Acesse nosso sistema sob qualquer dispositivo </p>
@@ -56,7 +56,7 @@ export default function Home() {
                 </div>
             </section>
             <section className='mb-40 px-10 bg-[url("Assets/dollars.png")] bg-contain'>
-                <div className='fontRal max-w-[1400px] mx-auto'>
+                <div className='fontPop max-w-[1400px] mx-auto'>
                     <h2 className='text-center text-2xl font-semibold'>Quais são os <strong className='text-primary font-semibold'>Benefícios</strong>?</h2>
                     <div className='mt-20'>
                         <h3 className='text-2xl mb-5'>A importância do <strong>controle financeiro</strong></h3>

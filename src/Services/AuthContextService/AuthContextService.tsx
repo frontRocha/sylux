@@ -1,5 +1,6 @@
 import { Auth, AuthProvider, getAuth, GoogleAuthProvider, OAuthCredential, signInWithPopup, User } from "firebase/auth";
-import { app } from "../../Mocks/FirebaseConfig"; 
+import { app } from "../../Mocks/FirebaseConfig";
+import { handleBusinessError } from "../../Utils/HandleBusinessError/HandleBusinessError";
 
 const providerGoogle: AuthProvider = new GoogleAuthProvider()
 
@@ -21,8 +22,8 @@ export class AuthContextService {
                 return user
             })
             .catch((err: unknown) => {
-                if(err instanceof Error) {
-                    console.error(err.message)
+                if (err instanceof Error) {
+                    handleBusinessError(err)
                 }
 
                 return err

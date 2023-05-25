@@ -5,6 +5,9 @@ import SetBalance from "./SetBalance/SetBalance";
 import Loader from "../../Components/Loader/Loader";
 import ComponentCrud from "./ComponentCrud/ComponentCrud";
 import { Balance } from "../../Interfaces/DashBoardInterface/DashBoardInterface";
+import { handleBusinessError, verifyValidateUser } from "../../Utils/HandleBusinessError/HandleBusinessError";
+import { DataServiceRequisition } from "../../Services/DataServiceRegistration/DataServiceRequisition";
+import { createControllerInstance } from "../../Utils/CreateComponentCrudController/CreateComponentCrudController";
 
 export default function DashBoard() {
 
@@ -17,43 +20,68 @@ export default function DashBoard() {
         getBalance()
     }, [])
 
+    const firestoreService = new DataServiceRequisition();
+
     const getBalance = async (): Promise<unknown> => {
-        setLoader(true)
+        showLoader()
 
         try {
-            if (user?.uid) {
-                const data: Balance[] = await new DashBoardController().getDataBalance(user.uid)
-                setBalance(data)
-            }
-
+            const uid = verifyValidateUser(user?.uid)
+            const instanceMethod = createControllerInstance(DashBoardController, firestoreService, 'openingbalance', uid)
+            await fetchData(instanceMethod)
         } catch (err: unknown) {
             if (err instanceof Error) {
-                console.error(err.message)
+                handleBusinessError(err)
             }
 
             return err
+        } finally {
+            hideLoader()
         }
+    }
 
-        setLoader(false)
+    const fetchData = async (instanceMethod: DashBoardController) => {
+        try {
+            const method = await instanceMethod.getDataBalance()
+            setBalance(method)
+        } catch (err) {
+            throw err
+        }
     }
 
     const setBalanceInitial = async (value: number): Promise<unknown> => {
         setLoader(true)
 
         try {
-            if (user?.uid) {
-                await new DashBoardController().setBalance(value, user.uid)
+            const uid = verifyValidateUser(user?.uid)
+            const instanceMethod = createControllerInstance(DashBoardController, firestoreService, 'openingbalance', uid)
 
-                await getBalance()
-            }
+            await setDataOnDatabase(instanceMethod, value)
+            await getBalance()
         } catch (err: unknown) {
             if (err instanceof Error) {
-                console.error(err.message)
+                handleBusinessError(err)
             }
 
             return err
         }
+    }
 
+    const setDataOnDatabase = async (instanceMethod: DashBoardController, value: number) => {
+        try {
+            await instanceMethod.setBalance(value)
+            await fetchData(instanceMethod)
+        } catch (err) {
+            throw err
+        }
+    }
+
+    const showLoader = () => {
+        setLoader(true)
+    }
+
+    const hideLoader = () => {
+        setLoader(false)
     }
 
     return (

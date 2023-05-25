@@ -1,17 +1,17 @@
-import { FieldValues } from "react-hook-form"
-
 export class HandleDataPostIt {
-    public async getDataBalance(value: FieldValues): Promise<string> {
-        const validate: string = validateForm(value.title)
+    public async validateTitle(title: string): Promise<string> {
+        try {
+            const runValidate: void = validateForm(title)
 
-        return validate
+            return title
+        } catch(err) {
+            throw err
+        }
     }
 }
 
-const validateForm = (value: string): string => {
-    if (!value.length) {
+const validateForm = (title: string): void => {
+    if (!title.length) {
         throw new Error('Insira um titulo')
     }
-
-    return value
 }

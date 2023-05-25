@@ -7,7 +7,7 @@ export default function TalkMe() {
             <NavBar />
             <section className="h-[700px] min-h-screen flex flex-col justify-center items-center">
                 <div className="w-full text-center">
-                    <h2 className="text-xl fontRal py-4">Entre em contato comigo!</h2>
+                    <h2 className="text-xl fontPop py-4">Entre em contato comigo!</h2>
                     <div className="w-ful h-[300px] bg-primary flex items-center justify-center gap-10">
                         <a className="text-2xl text-white bg-black py-2 px-2 rounded-full" href="https://github.com/frontRocha" target='_blank' ><RiGithubFill /></a>
                         <a className="text-2xl text-white bg-black py-2 px-2 rounded-full" href="https://www.linkedin.com/in/frontRocha" target='_blank'><RiLinkedinFill /></a>

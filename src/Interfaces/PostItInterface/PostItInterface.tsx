@@ -3,6 +3,6 @@ export interface PostItItens {
     title: string
 }
 
-export type HandleData = {
-    handleData: (e: string) => void
+export type Props = {
+    sendData: (e: string) => void
 }
