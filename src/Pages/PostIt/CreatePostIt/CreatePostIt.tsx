@@ -76,17 +76,18 @@ export default function CreatePostIt({ sendData }: Props) {
                                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
-                                <Dialog.Panel className='relative transform overflow-hidden rounded-lg bg-primary text-left shadow-xl transition-all w-[400px] h-[500px]'>
-                                    <div className='w-[90%] flex justify-end'>
-                                        <button >x</button></div>
+                                <Dialog.Panel className=' relative transform overflow-hidden rounded-lg bg-primary text-left shadow-xl transition-all w-[400px] h-[500px]'>
+                                    <div className='w-[90%] flex justify-end pt-6'>
+                                        <button className="text-white">x</button>
+                                    </div>
                                     <Dialog.Title className='text-center text-white text-2xl fontPop pb-10'>Criando anotação</Dialog.Title>
 
                                     <FormProvider {...methods}>
-                                        <form className='flex flex-col items-center justify-between h-[300px]' onSubmit={methods.handleSubmit(handleDataForm)}>
+                                        <form className='flex flex-col items-center justify-between' onSubmit={methods.handleSubmit(handleDataForm)}>
                                             <div className='flex flex-col w-[70%]'>
                                                 <textarea placeholder="Digite aqui" {...methods.register('title')} className='resize-none text min-h-[300px] max-h-[300px] bg-transparent outline-none text-3xl text-white'></textarea>
                                             </div>
-                                            <div className='flex justify-end w-[70%]'>
+                                            <div className='flex justify-end w-full relative pt-4 pr-6'>
                                                 <Button className='bg-white py-2 px-8 text-sm text-primary rounded mt-1' text="Criar" />
                                             </div>
                                         </form>
