@@ -21,9 +21,8 @@ export default function CreatePostIt({ sendData }: Props) {
         try {
             const validateData: string = await new HandleDataPostIt().validateTitle(values.title)
 
-            sendData(values.title)
-            closeModal()
-            resetValues()
+            sendDataProps(values)
+            handleCloseModal()
         } catch (err: unknown) {
             if (err instanceof Error) {
                 handleBusinessError(err)
@@ -33,7 +32,12 @@ export default function CreatePostIt({ sendData }: Props) {
         }
     }
 
-    const resetValues = () => {
+    const sendDataProps = (values: FieldValues) => {
+        sendData(values.title)
+    }
+
+    const handleCloseModal = () => {
+        closeModal()
         resetDataForm()
     }
 
@@ -78,7 +82,7 @@ export default function CreatePostIt({ sendData }: Props) {
                             >
                                 <Dialog.Panel className=' relative transform overflow-hidden rounded-lg bg-primary text-left shadow-xl transition-all w-[400px] h-[500px]'>
                                     <div className='w-[90%] flex justify-end pt-6'>
-                                        <button className="text-white">x</button>
+                                        <button className="text-white" onClick={handleCloseModal}>x</button>
                                     </div>
                                     <Dialog.Title className='text-center text-white text-2xl fontPop pb-10'>Criando anotação</Dialog.Title>
 
