@@ -35,7 +35,8 @@ export class ComponentCrudController {
 
     async createData(values: FieldValues): Promise<void> {
         try {
-            const fetchedData = await this._firestoreService.createData({ route: this._route, userUid: this._userUid, endDate: values.endDate, name: values.name, startDate: values.startDate, type: values.type, value: values.value })
+            const value = parseFloat(values.value)
+            const fetchedData = await this._firestoreService.createData({ route: this._route, userUid: this._userUid, endDate: values.endDate, name: values.name, startDate: values.startDate, type: values.type, value: value })
         } catch(err) {
             throw err
         }

@@ -97,6 +97,7 @@ export default function Values({ item }: List) {
     const fetchDataTaskBills = async (uid: string) => {
         try {
             const result = await new TypeValuesController(uid).handleTypesValues()
+            console.log(result)
 
             setType({ ...type, despesa: result.despesa, lucro: result.lucro })
         } catch (err) {
