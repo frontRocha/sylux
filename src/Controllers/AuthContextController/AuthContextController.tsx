@@ -4,8 +4,8 @@ import { AuthContextService } from "../../Services/AuthContextService/AuthContex
 
 export class AuthContextController {
     public async handleDataGoogleAuth(): Promise<User | void> {
-        const result = await new AuthContextService().runAuth()
+        const result = await new AuthContextService().runAuth();
 
-        return result
-    }
-}
+        return result;
+    };
+};

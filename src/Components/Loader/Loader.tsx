@@ -1,4 +1,4 @@
-import './Loader.css'
+import './Loader.css';
 
 export default function Loader() {
     return (
@@ -9,4 +9,4 @@ export default function Loader() {
             <span></span>
         </div>
     )
-}
+};

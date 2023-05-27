@@ -1,65 +1,66 @@
-import { useState, useContext } from 'react'
-import { FieldValues, useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
+import { useState, useContext } from 'react';
+import { FieldValues, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
-import NavBar from '../../Components/Layout/NavBar/NavBar'
+import NavBar from '../../Components/Layout/NavBar/NavBar';
 
-import checkedSucess from '../../Assets/sucess.gif'
+import checkedSucess from '../../Assets/sucess.gif';
 
-import { FeedbackController } from '../../Controllers/FeedbackController/FeedbackController'
-import { handleBusinessError, verifyValidateUser } from '../../Utils/HandleBusinessError/HandleBusinessError'
-import { DataServiceRequisition } from '../../Services/DataServiceRegistration/DataServiceRequisition'
-import { createControllerInstance } from '../../Utils/CreateComponentCrudController/CreateComponentCrudController'
-import { AuthFirebase } from '../../Context/Auth'
+import { FeedbackController } from '../../Controllers/FeedbackController/FeedbackController';
+import { handleBusinessError, verifyValidateUser } from '../../Utils/HandleBusinessError/HandleBusinessError';
+import { DataServiceRequisition } from '../../Services/DataServiceRegistration/DataServiceRequisition';
+import { createControllerInstance } from '../../Utils/CreateComponentCrudController/CreateComponentCrudController';
+import { AuthFirebase } from '../../Context/Auth';
+
 export default function Feedback() {
 
-    const navigate = useNavigate()
-    const methods = useForm<FieldValues>()
-    const [loader, setLoader] = useState<boolean>(false)
-    const { user } = useContext(AuthFirebase)
+    const navigate = useNavigate();
+    const methods = useForm<FieldValues>();
+    const [loader, setLoader] = useState<boolean>(false);
+    const { user } = useContext(AuthFirebase);
 
     const firestoreService = new DataServiceRequisition();
 
     const createFeedback = async (e: FieldValues): Promise<unknown> => {
         try {
-            showLoader()
-            const uid = verifyValidateUser(user?.uid)
-            const instanceMethod = createControllerInstance(FeedbackController, firestoreService, 'feedback', uid)
-            const validate = validateData(instanceMethod, e)
-            await setDataOnDatabase(instanceMethod, validate)
+            showLoader();
+            const uid = verifyValidateUser(user?.uid);
+            const instanceMethod = createControllerInstance(FeedbackController, firestoreService, 'feedback', uid);
+            const validate = validateData(instanceMethod, e);
+            await setDataOnDatabase(instanceMethod, validate);
 
-            navigate('/')
+            navigate('/');
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
+                handleBusinessError(err);
             }
 
-            return err
-        }
-    }
+            return err;
+        };
+    };
 
     const setDataOnDatabase = async (instanceMethod: FeedbackController, description: string) => {
         try {
-            const result: void = await instanceMethod.setData(description)
+            const result: void = await instanceMethod.setData(description);
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const validateData = (instanceMethod: FeedbackController, e: FieldValues): string => {
         try {
-            const validate: string = instanceMethod.validate(e)
+            const validate: string = instanceMethod.validate(e);
 
-            return validate
+            return validate;
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const showLoader = () => {
-        setLoader(true)
-    }
+        setLoader(true);
+    };
 
     return (
         <main>

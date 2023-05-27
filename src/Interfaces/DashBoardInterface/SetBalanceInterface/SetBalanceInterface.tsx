@@ -1,3 +1,3 @@
 export type DataFormProps = {
-    dataForm: (e: number) => void
-}
+    dataForm: (e: number) => void;
+};

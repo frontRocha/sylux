@@ -1,55 +1,55 @@
-import { useState, Fragment } from 'react'
+import { useState, Fragment } from 'react';
 
-import { FieldValues, FormProvider, useForm } from "react-hook-form"
-import { Dialog, Transition } from '@headlessui/react'
-import { ToastContainer, toast } from "react-toastify"
+import { FieldValues, FormProvider, useForm } from "react-hook-form";
+import { Dialog, Transition } from '@headlessui/react';
+import { ToastContainer } from "react-toastify";
 
-import { Button } from "../../../Components/Button/Button"
+import { Button } from "../../../Components/Button/Button";
 
-import { HandleDataPostIt } from "../../../Controllers/PostItController/HandleDataPostItController/HandleDataPostItController"
-import { Props } from "../../../Interfaces/PostItInterface/PostItInterface"
+import { HandleDataPostIt } from "../../../Controllers/PostItController/HandleDataPostItController/HandleDataPostItController";
+import { Props } from "../../../Interfaces/PostItInterface/PostItInterface";
 
-import './CreatePostIt.css'
-import { handleBusinessError } from '../../../Utils/HandleBusinessError/HandleBusinessError'
+import './CreatePostIt.css';
+import { handleBusinessError } from '../../../Utils/HandleBusinessError/HandleBusinessError';
 
 export default function CreatePostIt({ sendData }: Props) {
 
-    const methods = useForm<FieldValues>()
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const methods = useForm<FieldValues>();
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const handleDataForm = async (values: FieldValues): Promise<unknown> => {
         try {
-            const validateData: string = await new HandleDataPostIt().validateTitle(values.title)
+            const validateData: string = await new HandleDataPostIt().validateTitle(values.title);
 
-            sendDataProps(values)
-            handleCloseModal()
+            sendDataProps(values);
+            handleCloseModal();
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
-            return err
-        }
-    }
+            return err;
+        };
+    };
 
     const sendDataProps = (values: FieldValues) => {
-        sendData(values.title)
-    }
+        sendData(values.title);
+    };
 
     const handleCloseModal = () => {
-        closeModal()
-        resetDataForm()
-    }
+        closeModal();
+        resetDataForm();
+    };
 
     const resetDataForm = () => {
         methods.reset({
             title: ''
-        })
-    }
+        });
+    };
 
     const closeModal = () => {
-        setIsOpen(false)
-    }
+        setIsOpen(false);
+    };
 
     return (
         <div>

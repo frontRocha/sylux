@@ -10,32 +10,32 @@ export class FeedbackController {
     constructor(firestoreService: IDataService<void>, route: string, userUid: string) {
         this._firestoreService = firestoreService;
         this._route = route;
-        this._userUid = userUid
+        this._userUid = userUid;
     }
 
     public async setData(description: string): Promise<void> {
         try {
-            await this._firestoreService.createData({ route: this._route, userUid: this._userUid, description })
+            await this._firestoreService.createData({ route: this._route, userUid: this._userUid, description });
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     public validate(e: FieldValues): string {
         try {
-            const result: string = runValidate(e.description)
+            const result: string = runValidate(e.description);
 
-            return result
+            return result;
         } catch (err) {
-            throw err
-        }
-    }
-}
+            throw err;
+        };
+    };
+};
 
 const runValidate = (description: string): string => {
     if (description.length < 4) {
-        throw new Error('Digite algo válido')
-    }
+        throw new Error('Digite algo válido');
+    };
 
-    return description
-}
+    return description;
+};

@@ -16,114 +16,113 @@ import { createControllerInstance } from "../../../../Utils/CreateComponentCrudC
 
 
 export default function Values({ item }: List) {
-    const { user } = useContext(AuthFirebase)
+    const { user } = useContext(AuthFirebase);
 
-    const [loader, setLoader] = useState<boolean>(false)
-    const [saldo, setSaldo] = useState<Balance[]>([])
+    const [loader, setLoader] = useState<boolean>(false);
+    const [saldo, setSaldo] = useState<Balance[]>([]);
     const [type, setType] = useState<Type>({
         lucro: 0,
         despesa: 0
-    })
+    });
 
     useEffect(() => {
-        showLoader()
-        getValues()
-    }, [item])
+        showLoader();
+        getValues();
+    }, [item]);
 
     const firestoreService = new DataServiceRequisition();
 
     const getValues = async (): Promise<unknown> => {
         try {
-            const uid = verifyValidateUser(user?.uid)
-            const instanceMethod = createControllerInstance(ValuesController, firestoreService, 'openingbalance', uid)
-            await fetchDataOpeningBalance(instanceMethod)
-            await setTypeValues()
+            const uid = verifyValidateUser(user?.uid);
+            const instanceMethod = createControllerInstance(ValuesController, firestoreService, 'openingbalance', uid);
+            await fetchDataOpeningBalance(instanceMethod);
+            await setTypeValues();
 
-            hideLoader()
+            hideLoader();
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
-            return err
-        }
-    }
+            return err;
+        };
+    };
 
     const setTypeValues = async (): Promise<unknown> => {
         try {
-            const uid = verifyValidateUser(user?.uid)
-            await fetchDataTaskBills(uid)
+            const uid = verifyValidateUser(user?.uid);
+            await fetchDataTaskBills(uid);
 
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
-            return err
-        }
+            return err;
+        };
 
-        setLoader(false)
-    }
+        hideLoader();
+    };
 
     const editCurrentBalance = async (value: string, id: string): Promise<unknown> => {
         try {
-            showLoader()
-            const uid = verifyValidateUser(user?.uid)
-            const instanceMethod = createControllerInstance(ValuesController, firestoreService, 'openingbalance', uid)
-            await editDataOnDatabase(instanceMethod, value, id)
+            showLoader();
+            const uid = verifyValidateUser(user?.uid);
+            const instanceMethod = createControllerInstance(ValuesController, firestoreService, 'openingbalance', uid);
+            await editDataOnDatabase(instanceMethod, value, id);
 
-            await getValues()
+            await getValues();
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
-            return err
+            return err;
         } finally {
-            hideLoader()
-        }
-    }
+            hideLoader();
+        };
+    };
 
     const fetchDataOpeningBalance = async (instanceMethod: ValuesController) => {
         try {
-            const result: Balance[] = await instanceMethod.getDataOpeningBalance()
+            const result: Balance[] = await instanceMethod.getDataOpeningBalance();
 
-            setSaldo(result)
+            setSaldo(result);
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const fetchDataTaskBills = async (uid: string) => {
         try {
-            const result = await new TypeValuesController(uid).handleTypesValues()
-            console.log(result)
+            const result = await new TypeValuesController(uid).handleTypesValues();
 
-            setType({ ...type, despesa: result.despesa, lucro: result.lucro })
+            setType({ ...type, despesa: result.despesa, lucro: result.lucro });
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const editDataOnDatabase = async (instanceMethod: ValuesController, value: string, id: string) => {
         try {
-            await instanceMethod.editBalance(value, id)
+            await instanceMethod.editBalance(value, id);
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const showLoader = () => {
-        setLoader(true)
-    }
+        setLoader(true);
+    };
 
     const hideLoader = () => {
-        setLoader(false)
-    }
+        setLoader(false);
+    };
 
-    const balance: number[] = saldo.map(({ value }) => value)
+    const balance: number[] = saldo.map(({ value }) => value);
 
-    const currentBalance: number = balance[0] - type.despesa + type.lucro
+    const currentBalance: number = balance[0] - type.despesa + type.lucro;
 
     return (
         <div>

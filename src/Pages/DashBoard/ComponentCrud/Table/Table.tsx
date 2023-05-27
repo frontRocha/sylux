@@ -1,44 +1,44 @@
-import { useEffect, useState } from "react"
-import { Trash } from "phosphor-react"
+import { useEffect, useState } from "react";
+import { Trash } from "phosphor-react";
 
-import { Loader } from "../Loader/Loader"
+import { Loader } from "../Loader/Loader";
 
-import { Items } from "../../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface"
+import { Items } from "../../../../Interfaces/DashBoardInterface/ComponentsCrudInterface/ComponentsCrudInterface";
 
 interface Props {
-    data: Items[]
-    sendId: (id: string) => void
-}
+    data: Items[];
+    sendId: (id: string) => void;
+};
 
 export default function Table({ data, sendId }: Props) {
 
-    const [loader, setLoader] = useState<boolean>(false)
-    const [vetor, setVetor] = useState<Items[]>([])
+    const [loader, setLoader] = useState<boolean>(false);
+    const [vetor, setVetor] = useState<Items[]>([]);
 
     useEffect(() => {
-        setLoader(true)
-        getData()
-    }, [data])
+        setLoader(true);
+        getData();
+    }, [data]);
 
     const getData = async (): Promise<void> => {
-        setVetor(Object.values(data))
+        setVetor(Object.values(data));
 
-        hideLoader()
-    }
+        hideLoader();
+    };
 
     const receiveId = (id: string): void => {
-        sendId(id)
+        sendId(id);
 
-        showLoader()
-    }
+        showLoader();
+    };
 
     const showLoader = () => {
-        setLoader(true)
-    }
+        setLoader(true);
+    };
 
     const hideLoader = () => {
-        setLoader(false)
-    }
+        setLoader(false);
+    };
 
     return (
         <div className='active min-h-[400px] max-h-[400px] overflow-auto bg-white rounded-2xl rounded-t-none'>

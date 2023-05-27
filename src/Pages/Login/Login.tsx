@@ -1,17 +1,17 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
-import { AuthFirebase } from '../../Context/Auth'
+import { AuthFirebase } from '../../Context/Auth';
 
-import imageLogin from '../../Assets/imageLogin.png'
-import googleLogin from '../../Assets/google.png'
+import imageLogin from '../../Assets/imageLogin.png';
+import googleLogin from '../../Assets/google.png';
 
 export default function Login() {
 
-    const { runAuth } = useContext(AuthFirebase)
+    const { runAuth } = useContext(AuthFirebase);
 
     const handleData = async (): Promise<void> => {
-        runAuth()
-    }
+        runAuth();
+    };
 
     return (
         <section className='bg-[#F6F9FC]'>

@@ -1,16 +1,16 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Home from "../../Pages/Home/Home"
-import Login from "../../Pages/Login/Login"
-import Sidebar from "../../Components/Layout/Sidebar/Sidebar"
-import DashBoard from "../../Pages/DashBoard/DashBoard"
-import PostIt from "../../Pages/PostIt/PostIt"
+import Home from "../../Pages/Home/Home";
+import Login from "../../Pages/Login/Login";
+import Sidebar from "../../Components/Layout/Sidebar/Sidebar";
+import DashBoard from "../../Pages/DashBoard/DashBoard";
+import PostIt from "../../Pages/PostIt/PostIt";
 
-import { PrivateAcessLogin, PrivateAcessToSystem } from "../Privates/Private"
-import NavBarSystem from '../../Components/Layout/NavBarSystem/NavBarSystem'
-import Feedback from '../../Pages/Feedback/Feedback'
-import TalkMe from '../../Pages/TalkMe/TalkMe'
+import { PrivateAcessLogin, PrivateAcessToSystem } from "../Privates/Private";
+import NavBarSystem from '../../Components/Layout/NavBarSystem/NavBarSystem';
+import Feedback from '../../Pages/Feedback/Feedback';
+import TalkMe from '../../Pages/TalkMe/TalkMe';
 
 export const Index = () => {
     return (
@@ -52,4 +52,4 @@ export const Index = () => {
             </Routes>
         </BrowserRouter>
     )
-}
+};

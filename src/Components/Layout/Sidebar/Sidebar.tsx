@@ -1,15 +1,15 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 import { NavLink } from "react-router-dom";
 
 import { Wallet, NoteBlank, SignOut } from 'phosphor-react'
 
 import { AuthFirebase } from "../../../Context/Auth";
 
-import './Sideber.css'
+import './Sideber.css';
 
 export default function Sidebar() {
 
-    const { user, runLogout } = useContext(AuthFirebase)
+    const { user, runLogout } = useContext(AuthFirebase);
 
     let activeClassName: string = "underline";
 

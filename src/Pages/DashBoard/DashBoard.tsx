@@ -11,78 +11,78 @@ import { createControllerInstance } from "../../Utils/CreateComponentCrudControl
 
 export default function DashBoard() {
 
-    const { user } = useContext(AuthFirebase)
+    const { user } = useContext(AuthFirebase);
 
-    const [balance, setBalance] = useState<Balance[]>()
-    const [loader, setLoader] = useState<boolean>(true)
+    const [balance, setBalance] = useState<Balance[]>();
+    const [loader, setLoader] = useState<boolean>(true);
 
     useEffect(() => {
-        getBalance()
-    }, [])
+        getBalance();
+    }, []);
 
     const firestoreService = new DataServiceRequisition();
 
     const getBalance = async (): Promise<unknown> => {
-        showLoader()
+        showLoader();
 
         try {
-            const uid = verifyValidateUser(user?.uid)
-            const instanceMethod = createControllerInstance(DashBoardController, firestoreService, 'openingbalance', uid)
-            await fetchData(instanceMethod)
+            const uid = verifyValidateUser(user?.uid);
+            const instanceMethod = createControllerInstance(DashBoardController, firestoreService, 'openingbalance', uid);
+            await fetchData(instanceMethod);
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
-            return err
+            return err;
         } finally {
-            hideLoader()
-        }
-    }
+            hideLoader();
+        };
+    };
 
     const fetchData = async (instanceMethod: DashBoardController) => {
         try {
-            const method = await instanceMethod.getDataBalance()
-            setBalance(method)
+            const method = await instanceMethod.getDataBalance();
+            setBalance(method);
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const setBalanceInitial = async (value: number): Promise<unknown> => {
-        setLoader(true)
+        showLoader();
 
         try {
-            const uid = verifyValidateUser(user?.uid)
-            const instanceMethod = createControllerInstance(DashBoardController, firestoreService, 'openingbalance', uid)
+            const uid = verifyValidateUser(user?.uid);
+            const instanceMethod = createControllerInstance(DashBoardController, firestoreService, 'openingbalance', uid);
 
-            await setDataOnDatabase(instanceMethod, value)
-            await getBalance()
+            await setDataOnDatabase(instanceMethod, value);
+            await getBalance();
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
-            return err
-        }
-    }
+            return err;
+        };
+    };
 
     const setDataOnDatabase = async (instanceMethod: DashBoardController, value: number) => {
         try {
-            await instanceMethod.setBalance(value)
-            await fetchData(instanceMethod)
+            await instanceMethod.setBalance(value);
+            await fetchData(instanceMethod);
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const showLoader = () => {
-        setLoader(true)
-    }
+        setLoader(true);
+    };
 
     const hideLoader = () => {
-        setLoader(false)
-    }
+        setLoader(false);
+    };
 
     return (
         <section className="overflow-hidden md:ml-10 bg-[#F2F2F2] flex flex-col justify-center items-center h-auto min-h-screen">

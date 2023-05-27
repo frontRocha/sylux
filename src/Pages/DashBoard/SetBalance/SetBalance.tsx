@@ -1,58 +1,57 @@
 import { useContext } from "react"
 
-import { useForm, FormProvider } from "react-hook-form"
-import { FieldValues } from "react-hook-form/dist/types"
-import { ToastContainer, toast } from "react-toastify"
+import { useForm, FormProvider } from "react-hook-form";
+import { FieldValues } from "react-hook-form/dist/types";
+import { ToastContainer } from "react-toastify";
 
-import { AuthFirebase } from "../../../Context/Auth"
+import { AuthFirebase } from "../../../Context/Auth";
 
-import { Button } from "../../../Components/Button/Button"
-import { Input } from "../../../Components/Input/Input"
-import { Label } from "../../../Components/Label/Label"
+import { Button } from "../../../Components/Button/Button";
+import { Input } from "../../../Components/Input/Input";
+import { Label } from "../../../Components/Label/Label";
 
-import { HandleDataForm } from "../../../Controllers/DashBoardControllers/SetBalanceController/SetBalanceController"
-import { DataFormProps } from "../../../Interfaces/DashBoardInterface/SetBalanceInterface/SetBalanceInterface"
-import { handleBusinessError } from "../../../Utils/HandleBusinessError/HandleBusinessError"
-
+import { HandleDataForm } from "../../../Controllers/DashBoardControllers/SetBalanceController/SetBalanceController";
+import { DataFormProps } from "../../../Interfaces/DashBoardInterface/SetBalanceInterface/SetBalanceInterface";
+import { handleBusinessError } from "../../../Utils/HandleBusinessError/HandleBusinessError";
 
 export default function SetBalance({ dataForm }: DataFormProps) {
 
     const methods = useForm<FieldValues>();
-    const { user } = useContext(AuthFirebase)
+    const { user } = useContext(AuthFirebase);
 
-    let userName: string | null | undefined = user?.displayName
+    let userName: string | null | undefined = user?.displayName;
     if (userName) {
         let tmp: string[] = userName.split(" ");
         userName = tmp[0];
-    }
+    };
 
     const handleDataForm = async (e: FieldValues): Promise<unknown> => {
         try {
-            const validateValue = await validateData(e)
+            const validateValue = await validateData(e);
 
-            sendData(validateValue)
+            sendData(validateValue);
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
-            return err
-        }
-    }
+            return err;
+        };
+    };
 
     const validateData = async (e: FieldValues): Promise<number> => {
         try {
-            const validateValue = await new HandleDataForm().validateValue(e)
+            const validateValue = await new HandleDataForm().validateValue(e);
 
-            return validateValue
+            return validateValue;
         } catch(err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const sendData = (validateValue: number) => {
-        dataForm(validateValue)
-    }
+        dataForm(validateValue);
+    };
     
     return (
         <div className="h-[700px] min-h-screen flex flex-col justify-center items-center">

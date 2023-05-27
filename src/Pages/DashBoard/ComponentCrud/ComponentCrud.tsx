@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
-import { toast, ToastContainer } from 'react-toastify'
 
 import { AuthFirebase } from "../../../Context/Auth";
 
@@ -22,105 +21,105 @@ import { createControllerInstance } from "../../../Utils/CreateComponentCrudCont
 
 export default function ComponentCrud() {
 
-    const { user } = useContext(AuthFirebase)
+    const { user } = useContext(AuthFirebase);
 
-    const methods = useForm<FieldValues>()
+    const methods = useForm<FieldValues>();
 
-    const [todos, setTodos] = useState<Items[]>([])
-    const [type, setType] = useState<string>('despesa')
-    const [loader, setLoader] = useState<boolean>(false)
+    const [todos, setTodos] = useState<Items[]>([]);
+    const [type, setType] = useState<string>('despesa');
+    const [loader, setLoader] = useState<boolean>(false);
 
     useEffect(() => {
-        getTodos()
-    }, [])
+        getTodos();
+    }, []);
 
     const firestoreService = new DataServiceRequisition();
 
     const getTodos = async (): Promise<unknown> => {
         try {
-            const uid = verifyValidateUser(user?.uid)
-            const instanceMethod = createControllerInstance(ComponentCrudController, firestoreService, 'taskbills', uid)
-            fetchData(instanceMethod)
+            const uid = verifyValidateUser(user?.uid);
+            const instanceMethod = createControllerInstance(ComponentCrudController, firestoreService, 'taskbills', uid);
+            fetchData(instanceMethod);
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
-            return err
+            return err;
         } finally {
-            hideLoader()
-        }
-    }
+            hideLoader();
+        };
+    };
 
     const handleData = async (values: FieldValues): Promise<unknown> => {
         try {
-            showLoader()
-            const uid = verifyValidateUser(user?.uid)
-            const instanceMethod = createControllerInstance(ComponentCrudController, firestoreService, 'taskbills', uid)
+            showLoader();
+            const uid = verifyValidateUser(user?.uid);
+            const instanceMethod = createControllerInstance(ComponentCrudController, firestoreService, 'taskbills', uid);
             await validateDataForm(instanceMethod, values);
             await resetDataForm();
             await sendDataToDatabase(instanceMethod, values);
             await getTodos();
         } catch (err) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
             return err;
         } finally {
             hideLoader();
-        }
+        };
     };
 
     const deleteItem = async (id: string): Promise<unknown> => {
         try {
-            const uid = verifyValidateUser(user?.uid)
-            const instanceMethod = createControllerInstance(ComponentCrudController, firestoreService, 'taskbills', uid)
-            await deleteDataToDatabase(instanceMethod, id)
-            showSuccessMessage('Deletado com sucesso')
-            await getTodos()
+            const uid = verifyValidateUser(user?.uid);
+            const instanceMethod = createControllerInstance(ComponentCrudController, firestoreService, 'taskbills', uid);
+            await deleteDataToDatabase(instanceMethod, id);
+            showSuccessMessage('Deletado com sucesso');
+            await getTodos();
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
-            return err
-        }
-    }
+            return err;
+        };
+    };
 
     const fetchData = async (instanceMethod: ComponentCrudController) => {
         try {
-            const method = await instanceMethod.getData()
+            const method = await instanceMethod.getData();
 
-            setTodos(method)
+            setTodos(method);
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const sendDataToDatabase = async (instanceMethod: ComponentCrudController, values: FieldValues) => {
         try {
             await instanceMethod.createData(values);
         } catch (err) {
-            throw err
-        }
+            throw err;
+        };
     };
 
     const deleteDataToDatabase = async (instanceMethod: ComponentCrudController, id: string) => {
         try {
-            await instanceMethod.deleteData(id)
+            await instanceMethod.deleteData(id);
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const validateDataForm = async (instanceMethod: ComponentCrudController, values: FieldValues) => {
         try {
-            await instanceMethod.validateData(values)
+            await instanceMethod.validateData(values);
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const resetDataForm = async (): Promise<void> => {
         resetFormValues();
@@ -143,11 +142,11 @@ export default function ComponentCrud() {
     };
 
     const showLoader = () => {
-        setLoader(true)
+        setLoader(true);
     }
 
     const hideLoader = () => {
-        setLoader(false)
+        setLoader(false);
     }
 
     return (

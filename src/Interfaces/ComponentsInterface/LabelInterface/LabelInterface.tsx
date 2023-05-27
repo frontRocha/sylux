@@ -1,5 +1,5 @@
 export interface Props {
-    text: string
-    className: string
-    htmlFor: string
-}
+    text: string;
+    className: string;
+    htmlFor: string;
+};

@@ -6,16 +6,16 @@ export class TypeValuesController {
     private _userUid: string;
 
     constructor(userUid: string) {
-        this._userUid = userUid
-    }
+        this._userUid = userUid;
+    };
 
     public async handleTypesValues(): Promise<Type> {
         try {
-            const fetchedData: Type = await new ValuesService().getTypeValues(this._userUid)
+            const fetchedData: Type = await new ValuesService().getTypeValues(this._userUid);
 
-            return fetchedData
+            return fetchedData;
         } catch(err) {
-            throw err
-        }
-    }
-}
+            throw err;
+        };
+    };
+};

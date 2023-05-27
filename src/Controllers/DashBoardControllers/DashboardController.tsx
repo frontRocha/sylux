@@ -10,25 +10,24 @@ export class DashBoardController {
     constructor(firestoreService: IDataService<Balance>, route: string, userUid: string) {
         this._firestoreService = firestoreService;
         this._route = route;
-        this._userUid = userUid
-    }
+        this._userUid = userUid;
+    };
 
     public async getDataBalance(): Promise<Balance[]> {
         try {
-            const fetchedData: Balance[] = await this._firestoreService.getData({ route: this._route, userUid: this._userUid })
+            const fetchedData: Balance[] = await this._firestoreService.getData({ route: this._route, userUid: this._userUid });
 
-            return fetchedData
+            return fetchedData;
         } catch(err) {
-            throw err
-        }
-        
-    }
+            throw err;
+        };
+    };
 
     public async setBalance(value: number): Promise<void> {
         try {
-            const fetchedData = await this._firestoreService.createData({ route: this._route, userUid: this._userUid, value})
+            const fetchedData = await this._firestoreService.createData({ route: this._route, userUid: this._userUid, value});
         } catch(err) {
-            throw err
-        }
-    }
-}
+            throw err;
+        };
+    };
+};

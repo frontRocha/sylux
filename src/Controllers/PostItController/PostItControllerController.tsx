@@ -18,23 +18,23 @@ export class PostItController {
 
             return fetchedData;
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     async deleteData(id: string): Promise<void> {
         try {
-            const fetchedData = await this._firestoreService.deleteData({ route: this._route, userUid: this._userUid, id })
+            const fetchedData = await this._firestoreService.deleteData({ route: this._route, userUid: this._userUid, id });
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     async createData(title: string): Promise<void> {
         try {
-            const fetchedData = await this._firestoreService.createData({ route: this._route, userUid: this._userUid, title })
+            const fetchedData = await this._firestoreService.createData({ route: this._route, userUid: this._userUid, title });
         } catch (err) {
-            throw err
-        }
-    }
-}
+            throw err;
+        };
+    };
+};

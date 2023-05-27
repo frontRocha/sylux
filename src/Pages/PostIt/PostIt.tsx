@@ -17,99 +17,99 @@ import { createControllerInstance } from "../../Utils/CreateComponentCrudControl
 
 export default function PostIt() {
 
-    const [postIt, setPostIt] = useState<PostItItens[]>([])
-    const [loader, setLoader] = useState<boolean>(false)
+    const [postIt, setPostIt] = useState<PostItItens[]>([]);
+    const [loader, setLoader] = useState<boolean>(false);
 
-    const { user } = useContext(AuthFirebase)
+    const { user } = useContext(AuthFirebase);
 
     useEffect(() => {
-        showLoader()
-        getPostIt()
-    }, [])
+        showLoader();
+        getPostIt();
+    }, []);
 
     const firestoreService = new DataServiceRequisition();
 
     const getPostIt = async (): Promise<void> => {
         try {
-            const uid = verifyValidateUser(user?.uid)
-            const instanceMethod = createControllerInstance(PostItController, firestoreService, 'postit', uid)
-            await fetchData(instanceMethod)
+            const uid = verifyValidateUser(user?.uid);
+            const instanceMethod = createControllerInstance(PostItController, firestoreService, 'postit', uid);
+            await fetchData(instanceMethod);
         } catch (err) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
         } finally {
-            hideLoader()
-        }
-    }
+            hideLoader();
+        };
+    };
 
     const deletePostIt = async (id: string): Promise<unknown> => {
         try {
-            showLoader()
-            const uid = verifyValidateUser(user?.uid)
-            const instanceMethod = createControllerInstance(PostItController, firestoreService, 'postit', uid)
-            await deleteDataToDatabase(instanceMethod, id)
+            showLoader();
+            const uid = verifyValidateUser(user?.uid);
+            const instanceMethod = createControllerInstance(PostItController, firestoreService, 'postit', uid);
+            await deleteDataToDatabase(instanceMethod, id);
 
-            await getPostIt()
+            await getPostIt();
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
-            return err
-        }
-    }
+            return err;
+        };
+    };
 
     const handleData = async (title: string): Promise<unknown> => {
         try {
-            showLoader()
-            const uid = verifyValidateUser(user?.uid)
-            const instanceMethod = createControllerInstance(PostItController, firestoreService, 'postit', uid)
-            await sendDataToDatabase(instanceMethod, title)
+            showLoader();
+            const uid = verifyValidateUser(user?.uid);
+            const instanceMethod = createControllerInstance(PostItController, firestoreService, 'postit', uid);
+            await sendDataToDatabase(instanceMethod, title);
 
-            await getPostIt()
+            await getPostIt();
         } catch (err: unknown) {
             if (err instanceof Error) {
-                handleBusinessError(err)
-            }
+                handleBusinessError(err);
+            };
 
-            return err
-        }
-    }
+            return err;
+        };
+    };
 
     const deleteDataToDatabase = async (instanceMethod: PostItController, id: string) => {
         try {
-            const method = await instanceMethod.deleteData(id)
+            const method = await instanceMethod.deleteData(id);
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const sendDataToDatabase = async (instanceMethod: PostItController, title: string) => {
         try {
-            const method = await instanceMethod.createData(title)
+            const method = await instanceMethod.createData(title);
         } catch (err) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const fetchData = async (instanceMethod: PostItController): Promise<void> => {
         try {
-            const method = await instanceMethod.getData()
+            const method = await instanceMethod.getData();
 
-            setPostIt(method)
+            setPostIt(method);
         } catch (err: unknown) {
-            throw err
-        }
-    }
+            throw err;
+        };
+    };
 
     const showLoader = () => {
-        setLoader(true)
-    }
+        setLoader(true);
+    };
 
     const hideLoader = () => {
-        setLoader(false)
-    }
+        setLoader(false);
+    };
 
     return (
         <div className="ml-4 md:ml-28">

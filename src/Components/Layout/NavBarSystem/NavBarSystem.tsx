@@ -5,11 +5,11 @@ import { Wallet, NoteBlank, SignOut } from 'phosphor-react'
 
 import { AuthFirebase } from "../../../Context/Auth";
 
-import './NavBarSystem.css'
+import './NavBarSystem.css';
 
 export default function NavBarSystem() {
 
-    const { runLogout, user } = useContext(AuthFirebase)
+    const { runLogout, user } = useContext(AuthFirebase);
 
     let activeClassName: string = "underline";
 
@@ -41,4 +41,4 @@ export default function NavBarSystem() {
             </nav>
         </header>
     )
-}
+};

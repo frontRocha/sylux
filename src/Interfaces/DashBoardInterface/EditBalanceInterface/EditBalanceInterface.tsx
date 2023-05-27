@@ -1,3 +1,3 @@
 export type EditBalanceProps = {
-    handleData: (value: string) => void
-}
+    handleData: (value: string) => void;
+};

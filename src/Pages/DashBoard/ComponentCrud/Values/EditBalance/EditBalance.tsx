@@ -13,37 +13,35 @@ import { EditBalanceProps } from "../../../../../Interfaces/DashBoardInterface/E
 
 export default function EditBalance({ handleData }: EditBalanceProps) {
 
-    const methods = useForm<FieldValues>()
+    const methods = useForm<FieldValues>();
 
-    const [show, setShow] = useState<boolean>(false)
+    const [show, setShow] = useState<boolean>(false);
 
-    const setShowOn = (): void => setShow(true)
+    const setShowOn = (): void => setShow(true);
 
-    const setShowOff = (): void => {
-        setShow(false)
-    }
+    const setShowOff = (): void => setShow(false);
 
     const resetValuesForm = () => {
         methods.reset({
             valor: ''
-        })
-    }
+        });
+    };
 
     const handleBalance = async (e: FieldValues): Promise<unknown> => {
         try {
-            const validateData = await new EditBalanceController().validateData(e.valor)
-            handleData(validateData.toString())
+            const validateData = await new EditBalanceController().validateData(e.valor);
+            handleData(validateData.toString());
             
-            setShowOff()
-            resetValuesForm()
+            setShowOff();
+            resetValuesForm();
         } catch (err: unknown) {
             if (err instanceof Error) {
-                toast.error(err.message)
-            }
+                toast.error(err.message);
+            };
 
-            return err
-        }
-    }
+            return err;
+        };
+    };
 
     return (
         <div>

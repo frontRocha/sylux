@@ -1,8 +1,8 @@
 export interface PostItItens {
-    id: string
-    title: string
-}
+    id: string;
+    title: string;
+};
 
 export type Props = {
-    sendData: (e: string) => void
-}
+    sendData: (e: string) => void;
+};
